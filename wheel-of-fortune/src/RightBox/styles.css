@@ -1,0 +1,43 @@
+.RightBox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100vh;
+  position: absolute;
+  width: 20rem;
+  height: 40rem;
+  right: 100px;
+  top: 10%;
+}
+
+.RightBox .shuffleButton {
+  background-color: white;
+  color: #6f71f8;
+  border: 2px solid #6f71f8;
+  border-radius: 8px;
+  padding: 14px 20px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  font-family: monospace;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s;
+          transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.RightBox .shuffleButton:hover {
+  background-color: #6f71f8;
+  color: white;
+}
+
+.RightBox .shuffleButton:focus {
+  outline: 0 !important;
+}
+/*# sourceMappingURL=styles.css.map */
