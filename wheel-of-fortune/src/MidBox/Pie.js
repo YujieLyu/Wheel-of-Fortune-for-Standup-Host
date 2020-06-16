@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import './midBox.scss';
 
 class Pie extends Component {
+    state = {
+        degree: null
+    }
 
     createPie() {
         let elementList = [...this.props.elementList]
@@ -21,34 +24,28 @@ class Pie extends Component {
                 </div >)
             )) : (null);
     }
-    handleClick() {
-        let x = 1024;
-        let y = 60204;
-        return  Math.floor(Math.random() * (x - y)) + y;
-        // let deg = Math.floor(100000 + Math.random()  * 90000);
-       
-    }
 
-    spin(){
-        let deg=this.mySpinner();
-        return {
-            rotate:deg + 'deg'
-        };
-    }
-    render() {
+    handleClick = (e) => {
         let x = 1024;
         let y = 60204;
         let deg = Math.floor(Math.random() * (x - y)) + y;
+        this.setState({
+            degree: deg
+        })
+  
+        // let deg = Math.floor(100000 + Math.random()  * 90000);
+    }
+
+    render() {
         return (
             <div className="MidBox" >
-                <ul className="midBoxPie" id="pie" style={this.spin()}>
+                <ul className="midBoxPie" id="pie" style={{ transform: 'rotate(' + this.state.degree + 'deg)' }}>
                     {this.createPie()}
-                    <button className="midBoxSpin" onClick={this.handleClick()}>Go</button>
                 </ul>
+                <button className="midBoxSpin" onClick={this.handleClick}>GO</button>
             </div>
         )
     }
-
 }
 
 

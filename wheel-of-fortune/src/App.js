@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import './default.scss';
+import './default.scss';
 
 import LeftBox from './LeftBox/ElementList';
 import MidBox from './MidBox/Pie';
@@ -27,9 +27,9 @@ class App extends Component {
       { id: 2, name: 'Brady' },
       { id: 3, name: 'DD' },
       { id: 4, name: 'Jason' },
-      { id: 5, name: 'Jessie' },
-      { id: 6, name: 'Marty' },
-      { id: 7, name: 'Matt' },
+      // { id: 5, name: 'Jessie' },
+      // { id: 6, name: 'Marty' },
+      // { id: 7, name: 'Matt' },
       { id: 8, name: 'Pras' },
       { id: 9, name: 'Rena' },
       { id: 10, name: 'Rod' }
@@ -81,18 +81,25 @@ class App extends Component {
     })
   }
 
+  shuffleWheel = () => {
+    let updatedList = [...this.state.pieEleList];
+    this.setState({
+      pieEleList: updatedList.sort(() => Math.random() - 0.5)
+    })
+  }
+
   render() {
     return (
       <div className="App">
         <div className="row">
           <div className="col-sm">
-            <LeftBox elementList={this.state.allElementList} reSetElementList={this.reSetElementList} addElement={this.addElement} />
+            <LeftBox elementList={this.state.allElementList} reSetElementList={this.reSetElementList} addElement={this.addElement} checkedList={this.state.pieEleList} />
           </div>
           <div className="col-sm">
             <MidBox elementList={this.state.pieEleList} colorList={this.state.colorsList} />
           </div>
           <div className="col-sm">
-            <RightBox />
+            <RightBox shuffleWheel={this.shuffleWheel} />
           </div>
         </div>
       </div>

@@ -13,15 +13,8 @@
 }
 
 body {
-
-    @include flexCenter();
     overflow: hidden;
     background: #fff;
     background-size: cover;
 }
 
-h1 {
-    position: absolute;
-    top: 2rem;
-    font-family: monospace;
-}
