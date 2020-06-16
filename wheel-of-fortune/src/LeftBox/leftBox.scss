@@ -1,0 +1,19 @@
+.LeftBox {
+    position: absolute;
+    width: 20rem;
+    height: 40rem;
+    left: 100px;
+    top: 20%;
+    font-family: monospace;
+    input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+        margin-right: 8px;
+        cursor: pointer;
+    }
+
+    p {
+        font-size: small;
+        margin-bottom: 10px;
+    }
+}

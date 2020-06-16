@@ -1,32 +1,53 @@
 import React, { Component } from 'react';
+// import './default.scss';
 
 import LeftBox from './LeftBox/ElementList';
 import MidBox from './MidBox/Pie';
-import RightBox from './RightBox/index'
+import RightBox from './RightBox/RightBox';
+
 
 class App extends Component {
   state = {
-    candidatesList: [
+    allElementList: [
       { id: 0, name: 'Adi' },
       { id: 1, name: 'Alex' },
       { id: 2, name: 'Brady' },
       { id: 3, name: 'DD' },
-      { id: 4, name: 'Jason' }
+      { id: 4, name: 'Jason' },
+      { id: 5, name: 'Jessie' },
+      { id: 6, name: 'Marty' },
+      { id: 7, name: 'Matt' },
+      { id: 8, name: 'Pras' },
+      { id: 9, name: 'Rena' },
+      { id: 10, name: 'Rod' }
     ],
     pieEleList: [
       { id: 0, name: 'Adi' },
       { id: 1, name: 'Alex' },
       { id: 2, name: 'Brady' },
       { id: 3, name: 'DD' },
-      { id: 4, name: 'Jason' }
+      { id: 4, name: 'Jason' },
+      { id: 5, name: 'Jessie' },
+      { id: 6, name: 'Marty' },
+      { id: 7, name: 'Matt' },
+      { id: 8, name: 'Pras' },
+      { id: 9, name: 'Rena' },
+      { id: 10, name: 'Rod' }
     ],
-    // candidateEleList: [
-    //   { id: 0, name: 'Adi' },
-    //   { id: 1, name: 'Alex' },
-    //   { id: 2, name: 'Brady' },
-    //   { id: 3, name: 'DD' },
-    //   { id: 4, name: 'Jason' }
-    // ]
+    colorsList: [
+      '#fd6363',
+      '#fa9d5f',
+      '#fac248',
+      '#f8de6b',
+      '#cbf779',
+      '#73fdad',
+      '#60c8f8',
+      '#60a7f8',
+      '#6f71f8',
+      '#a27dfa',
+      '#f391fc',
+      '#f860be'
+    ]
   }
 
   reSetElementList = (id) => {
@@ -38,7 +59,7 @@ class App extends Component {
       })
 
     ) : (
-        [...this.state.pieEleList, this.state.candidatesList.find(ele => ele.id === id)]
+        [...this.state.pieEleList, this.state.allElementList.find(ele => ele.id === id)]
 
       )
     this.setState({
@@ -47,12 +68,12 @@ class App extends Component {
   }
 
   addElement = (newEle) => {
-    newEle.id=this.state.candidatesList.length;
+    newEle.id = this.state.allElementList.length;
     let updatedPieEleList = [...this.state.pieEleList, newEle];
-    let updatedCanElList = [...this.state.candidatesList, newEle];
+    let updatedCanElList = [...this.state.allElementList, newEle];
     this.setState({
       pieEleList: updatedPieEleList,
-      candidatesList: updatedCanElList
+      allElementList: updatedCanElList
     })
   }
 
@@ -61,10 +82,10 @@ class App extends Component {
       <div className="App">
         <div className="row">
           <div className="col-sm">
-            <LeftBox elementList={this.state.candidatesList} reSetElementList={this.reSetElementList} addElement={this.addElement} />
+            <LeftBox elementList={this.state.allElementList} reSetElementList={this.reSetElementList} addElement={this.addElement} />
           </div>
           <div className="col-sm">
-            <MidBox elementList={this.state.pieEleList} />
+            <MidBox elementList={this.state.pieEleList} colorList={this.state.colorsList} />
           </div>
           <div className="col-sm">
             <RightBox />

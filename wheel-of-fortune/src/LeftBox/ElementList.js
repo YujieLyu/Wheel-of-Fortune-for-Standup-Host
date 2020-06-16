@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './leftBox.scss'
 
 import AddElement from './AddElement';
 
@@ -14,12 +15,12 @@ class ElementList extends Component {
         console.log(id)
     }
 
-    createList () {
+    createList() {
         let elementList = this.props.elementList;
         return elementList.length > 0 ? (
             elementList.map(ele =>
                 <div key={ele.id}>
-                    <input type="checkbox" defaultChecked={this.state.checkStatus} onChange={() => { this.handleChange(ele.id)}} ></input>
+                    <input type="checkbox" defaultChecked={this.state.checkStatus} onChange={() => { this.handleChange(ele.id) }} ></input>
                     <label htmlFor={ele.id}>{ele.name}</label>
                 </div>
             )) : (<p>Nothing here</p>)
@@ -31,7 +32,10 @@ class ElementList extends Component {
 
     render() {
         return (
-            <div>
+            <div className="LeftBox">
+                <h2>Customize the wheel</h2>
+                <p>(Ver 1.2.1.200612_beta)</p>
+                <p>No less than 3 options</p>
                 {this.createList()}
                 <AddElement addElement={this.addElement} />
             </div>

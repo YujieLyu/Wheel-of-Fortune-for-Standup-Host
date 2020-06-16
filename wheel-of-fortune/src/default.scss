@@ -1,0 +1,27 @@
+@mixin flexCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    outline: none;
+}
+
+body {
+
+    @include flexCenter();
+    overflow: hidden;
+    background: #fff;
+    background-size: cover;
+}
+
+h1 {
+    position: absolute;
+    top: 2rem;
+    font-family: monospace;
+}
