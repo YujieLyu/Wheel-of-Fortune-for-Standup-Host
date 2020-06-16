@@ -41,12 +41,16 @@ class App extends Component {
       '#f8de6b',
       '#cbf779',
       '#73fdad',
+      '#5cfadd',
       '#60c8f8',
       '#60a7f8',
       '#6f71f8',
       '#a27dfa',
+      '#c07dfa',
       '#f391fc',
-      '#f860be'
+      '#f860be',
+      '#f51d9b',
+
     ]
   }
 

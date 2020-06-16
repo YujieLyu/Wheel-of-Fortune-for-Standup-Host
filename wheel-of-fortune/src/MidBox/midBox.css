@@ -29,7 +29,7 @@
   transition: all ease 5s;
 }
 
-.MidBox .middleBoxPie li {
+.MidBox .midBoxPie li {
   overflow: hidden;
   position: absolute;
   top: -20%;

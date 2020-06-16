@@ -33,7 +33,7 @@ class ElementList extends Component {
     render() {
         return (
             <div className="LeftBox">
-                <h2>Customize the wheel</h2>
+                <h3>Customize the wheel</h3>
                 <p>(Ver 1.2.1.200612_beta)</p>
                 <p>No less than 3 options</p>
                 {this.createList()}
