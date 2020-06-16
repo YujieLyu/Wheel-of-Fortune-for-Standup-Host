@@ -18,7 +18,7 @@ class ElementList extends Component {
                     <input type="checkbox" defaultChecked={this.props.checkedList.filter(e => e.id === ele.id).length > 0} onChange={() => { this.handleChange(ele.id) }} ></input>
                     <label htmlFor={ele.id}>{ele.name}</label>
                 </div>
-            )) : (<p>Nothing here</p>)
+            )) : (null)
     }
 
     addElement = (newEle) => {

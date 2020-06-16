@@ -27,7 +27,7 @@ class AddElement extends Component {
             <div className="addElementForm">
                 <form onSubmit={this.handleSubmit}>
                     <input type="text" onChange={this.handleChange} value={this.state.name}></input>
-                    <button className="addBtn">Add</button>
+                    <button className="addBtn">Add New Candidate</button>
                 </form>
             </div>
         )
