@@ -1,0 +1,45 @@
+.LeftBox {
+    position: absolute;
+    width: 20rem;
+    height: 40rem;
+    left: 100px;
+    top: 15%;
+    font-family: monospace;
+    font-size: 16px;
+    input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        margin-right: 8px;
+        cursor: pointer;
+    }
+
+    .addElementForm{
+        margin-top: 20px;
+        font-size: small;
+    }
+
+    p {
+        font-size: small;
+        margin-bottom: 10px;
+    }
+
+    .addBtn {
+        background-color: white;
+        color: #6f71f8;
+        border: 1.5px solid #6f71f8;
+        padding: 1px 10px;
+        // text-align: center;
+        // display: inline-block;
+        font-family: monospace;
+        margin: 6px 0;
+        transition-duration: 0.4s;
+        cursor: pointer;
+        &:hover {
+            background-color: #6f71f8;
+            color: white;
+        }
+        &:focus {
+            outline: 0 !important;
+        }
+    }
+}
