@@ -31,7 +31,7 @@ class App extends Component {
       // { id: 6, name: 'Marty' },
       // { id: 7, name: 'Matt' },
       { id: 8, name: 'Pras' },
-      { id: 9, name: 'Rena' },
+      // { id: 9, name: 'Rena' },
       { id: 10, name: 'Rod' }
     ],
     colorsList: [

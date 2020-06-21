@@ -29,7 +29,7 @@ class ElementList extends Component {
         return (
             <div className="LeftBox">
                 <h3>Customize the wheel</h3>
-                <p>(Ver 2.1.0.dev1.200616_beta)</p>
+                <p>(Ver 2.1.1.dev1.200621_beta)</p>
                 <p>No less than 3 options</p>
                 {this.createList()}
                 <AddElement addElement={this.addElement} />
