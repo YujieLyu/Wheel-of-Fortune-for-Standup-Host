@@ -93,10 +93,13 @@ class App extends Component {
       <div className="App">
         <div className="row">
           <div className="col-sm">
-            <LeftBox elementList={this.state.allElementList} reSetElementList={this.reSetElementList} addElement={this.addElement} checkedList={this.state.pieEleList} />
+            <LeftBox elementList={this.state.allElementList}
+              reSetElementList={this.reSetElementList}
+              addElement={this.addElement}
+              checkedList={this.state.pieEleList} />
           </div>
           <div className="col-sm">
-            <MidBox elementList={this.state.pieEleList} colorList={this.state.colorsList} />
+            <MidBox pieEleList={this.state.pieEleList} colorList={this.state.colorsList} />
           </div>
           <div className="col-sm">
             <RightBox shuffleWheel={this.shuffleWheel} />

@@ -1,7 +1,8 @@
+@import '../default.scss';
+
 .MidBox {
-    // @include flexCenter();
+    @include flexCenter();
     position: relative;
-    margin: 0 auto;
     width: 40rem;
     height: 40rem;
     top: 10%;
@@ -12,9 +13,9 @@
         height: 70px;
         background: url("../resources/picker.png") no-repeat;
         background-size: 32px;
-        right: -40px;
-        top: 300px;
-        transform: rotate(90deg);
+        left: 47.5%;
+        top: -8%;
+        // transform: rotate(90deg);
     }
 
     .midBoxPie {
@@ -45,11 +46,8 @@
             height: 200%;
             text-align: center;
             padding-top: 200px;
-        }
-    
-        
+        }      
     }
-
 
     .midBoxSpin {
         position: absolute;

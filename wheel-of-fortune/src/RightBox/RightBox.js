@@ -7,7 +7,7 @@ const RightBox = (props) => {
         <div className="RightBox">
             <button className="shuffleButton" onClick={props.shuffleWheel}>
                 Shuffle the wheel
-      </button>
+            </button>
         </div>
     )
 }

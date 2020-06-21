@@ -1,9 +1,4 @@
-@mixin flexCenter {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
+@import '../default.scss';
 
 .RightBox {
     @include flexCenter();

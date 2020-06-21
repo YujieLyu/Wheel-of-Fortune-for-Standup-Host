@@ -7,25 +7,25 @@ class Pie extends Component {
     }
 
     createPie() {
-        let elementList = [...this.props.elementList]
+        let pieEleList = [...this.props.pieEleList]
         let sliceAngle, skewValue;
-        sliceAngle = 360 / elementList.length;
+        sliceAngle = 360 / pieEleList.length;
         skewValue = sliceAngle + 90;
 
-        return elementList.length > 0 ? (
-            elementList.map((ele, i) =>
+        return pieEleList.length > 0 ? (
+            pieEleList.map((ele, i) =>
                 (<div key={ele.id}>
                     <li className="midBoxPie__pieSlice" style={{
                         transform: 'rotate(' + sliceAngle * i + 'deg) skewY(' + skewValue + 'deg)',
                         background: this.props.colorList[i]
                     }}>
-                        <div className="midBoxPie__pieSliceName" style={{ transform: 'skewY(' + (180 - skewValue) + 'deg) rotate(' + sliceAngle / 2 + 'deg)' }}>{elementList[i].name}</div>
+                        <div className="midBoxPie__pieSliceName" style={{ transform: 'skewY(' + (180 - skewValue) + 'deg) rotate(' + sliceAngle / 2 + 'deg)' }}>{pieEleList[i].name}</div>
                     </li>
                 </div >)
             )) : (null);
     }
 
-    handleClick = (e) => {
+    handleClick = () => {
         let x = 1024;
         let y = 60204;
         let deg = Math.floor(Math.random() * (x - y)) + y;
