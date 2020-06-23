@@ -15,11 +15,13 @@ const { response } = require('express');
 const cors = require('cors');
 app.use(cors());
 
+
 const {
     getAll
 } = require('./APIs/candidates');
 
 app.get('/all', getAll);
+
 
 const {
     getCandidates
@@ -27,10 +29,18 @@ const {
 
 app.get('/candidates', getCandidates);
 
+
 const {
     addCandidate
 } = require('./APIs/candidates');
 
 app.post('/new', addCandidate);
+
+
+const {
+    getColors
+} = require('./APIs/colors');
+
+app.get('/colors', getColors)
 
 exports.api = functions.https.onRequest(app);
