@@ -8,32 +8,32 @@ import RightBox from './RightBox/RightBox';
 
 class App extends Component {
   state = {
-    allElementList: [
-      { id: 0, name: 'Adi' },
-      { id: 1, name: 'Alex' },
-      { id: 2, name: 'Brady' },
-      { id: 3, name: 'DD' },
-      { id: 4, name: 'Jason' },
-      { id: 5, name: 'Jessie' },
-      { id: 6, name: 'Marty' },
-      { id: 7, name: 'Matt' },
-      { id: 8, name: 'Pras' },
-      { id: 9, name: 'Rena' },
-      { id: 10, name: 'Rod' }
-    ],
-    pieEleList: [
-      { id: 0, name: 'Adi' },
-      { id: 1, name: 'Alex' },
-      { id: 2, name: 'Brady' },
-      { id: 3, name: 'DD' },
-      { id: 4, name: 'Jason' },
-      // { id: 5, name: 'Jessie' },
-      // { id: 6, name: 'Marty' },
-      // { id: 7, name: 'Matt' },
-      { id: 8, name: 'Pras' },
-      // { id: 9, name: 'Rena' },
-      { id: 10, name: 'Rod' }
-    ],
+    // allElementList: [
+    //   { id: 0, name: 'Adi' },
+    //   { id: 1, name: 'Alex' },
+    //   { id: 2, name: 'Brady' },
+    //   { id: 3, name: 'DD' },
+    //   { id: 4, name: 'Jason' },
+    //   { id: 5, name: 'Jessie' },
+    //   { id: 6, name: 'Marty' },
+    //   { id: 7, name: 'Matt' },
+    //   { id: 8, name: 'Pras' },
+    //   { id: 9, name: 'Rena' },
+    //   { id: 10, name: 'Rod' }
+    // ],
+    // pieEleList: [
+    //   { id: 0, name: 'Adi' },
+    //   { id: 1, name: 'Alex' },
+    //   { id: 2, name: 'Brady' },
+    //   { id: 3, name: 'DD' },
+    //   { id: 4, name: 'Jason' },
+    //   // { id: 5, name: 'Jessie' },
+    //   // { id: 6, name: 'Marty' },
+    //   // { id: 7, name: 'Matt' },
+    //   { id: 8, name: 'Pras' },
+    //   // { id: 9, name: 'Rena' },
+    //   { id: 10, name: 'Rod' }
+    // ],
     colorsList: [
       '#fd6363',
       '#fa9d5f',
@@ -93,10 +93,9 @@ class App extends Component {
       <div className="App">
         <div className="row">
           <div className="col-sm">
-            <LeftBox elementList={this.state.allElementList}
+            <LeftBox 
               reSetElementList={this.reSetElementList}
-              addElement={this.addElement}
-              checkedList={this.state.pieEleList} />
+              addElement={this.addElement}/>
           </div>
           <div className="col-sm">
             <MidBox pieEleList={this.state.pieEleList} colorList={this.state.colorsList} />

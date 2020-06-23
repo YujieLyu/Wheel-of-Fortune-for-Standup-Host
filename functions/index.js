@@ -11,6 +11,10 @@ const app = require('express')();
 
 const { response } = require('express');
 
+//without cors, frontend can't retreive data
+const cors = require('cors');
+app.use(cors());
+
 const {
     getAll
 } = require('./APIs/candidates');

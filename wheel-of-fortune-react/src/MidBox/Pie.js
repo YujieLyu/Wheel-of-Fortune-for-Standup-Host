@@ -1,13 +1,24 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import './midBox.scss';
 
 class Pie extends Component {
     state = {
-        degree: null
+        degree: null,
+        pieList:[]
+    }
+
+    componentDidMount(){
+
+        axios.get('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/candidates')
+            .then(res=>{
+                const pieList=res.data;
+                this.setState({pieList});
+            })
     }
 
     createPie() {
-        let pieEleList = [...this.props.pieEleList]
+        let pieEleList = [...this.state.pieList]
         let sliceAngle, skewValue;
         sliceAngle = 360 / pieEleList.length;
         skewValue = sliceAngle + 90;

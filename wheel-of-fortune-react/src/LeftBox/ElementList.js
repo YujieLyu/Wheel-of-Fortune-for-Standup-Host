@@ -1,12 +1,32 @@
 import React, { Component } from 'react';
-import './leftBox.scss'
+import axios from 'axios';
+import './leftBox.scss';
 
 import AddElement from './AddElement';
 
 class ElementList extends Component {
 
-    state={
-        
+    state = {
+        allList: [],
+        pieList: []
+    }
+
+    componentDidMount() {
+        axios.get('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/all')
+            .then(res => {
+                const allList = res.data;
+                this.setState({ allList });
+            });
+        console.log('here is all list: ' + this.state.allList);
+    }
+
+    componentDidUpdate(){
+        axios.get('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/candidates')
+            .then(res => {
+                const pieList = res.data;
+                this.setState({ pieList });
+            })
+            console.log(this.state.pieList.length);
     }
 
     handleChange = (id) => {
@@ -15,11 +35,13 @@ class ElementList extends Component {
     }
 
     createList() {
-        let elementList = this.props.elementList;
+        let elementList = [...this.state.allList];
         return elementList.length > 0 ? (
             elementList.map(ele =>
                 <div key={ele.id}>
-                    <input type="checkbox" defaultChecked={this.props.checkedList.filter(e => e.id === ele.id).length > 0} onChange={() => { this.handleChange(ele.id) }} ></input>
+                    <input type="checkbox"
+                       checked={this.state.pieList.filter(e=>e.name===ele.name).length>0}
+                        onChange={() => { this.handleChange(ele.id) }} ></input>
                     <label htmlFor={ele.id}>{ele.name}</label>
                 </div>
             )) : (null)
