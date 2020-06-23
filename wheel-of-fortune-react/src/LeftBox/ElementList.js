@@ -5,6 +5,10 @@ import AddElement from './AddElement';
 
 class ElementList extends Component {
 
+    state={
+        
+    }
+
     handleChange = (id) => {
         this.props.reSetElementList(id)
         console.log(id)
