@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class AddElement extends Component {
     state = {
@@ -7,9 +8,17 @@ class AddElement extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        if (this.state.name !== '') {
-            this.props.addElement(this.state);
+        const newCandidate = {
+            name: this.state.name
         }
+        axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/new', { newCandidate })
+            .then(res => {
+                console.log(res);
+                console.log(res.data)
+            })
+        // if (this.state.name !== '') {
+        //     // this.props.addElement(this.state);
+        // }
         this.setState({
             name: ''
         })

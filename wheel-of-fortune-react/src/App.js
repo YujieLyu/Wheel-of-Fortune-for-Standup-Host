@@ -45,15 +45,15 @@ class App extends Component {
     })
   }
 
-  addElement = (newEle) => {
-    newEle.id = this.state.allElementList.length;
-    let updatedPieEleList = [...this.state.pieEleList, newEle];
-    let updatedCanElList = [...this.state.allElementList, newEle];
-    this.setState({
-      pieEleList: updatedPieEleList,
-      allElementList: updatedCanElList
-    })
-  }
+  // addElement = (newEle) => {
+  //   newEle.id = this.state.allElementList.length;
+  //   let updatedPieEleList = [...this.state.pieEleList, newEle];
+  //   let updatedCanElList = [...this.state.allElementList, newEle];
+  //   this.setState({
+  //     pieEleList: updatedPieEleList,
+  //     allElementList: updatedCanElList
+  //   })
+  // }
 
   shuffleWheel = () => {
     let updatedList = [...this.state.pieEleList];
@@ -69,7 +69,8 @@ class App extends Component {
           <div className="col-sm">
             <LeftBox 
               reSetElementList={this.reSetElementList}
-              addElement={this.addElement}/>
+              // addElement={this.addElement}
+              />
           </div>
           <div className="col-sm">
             <MidBox pieEleList={this.state.pieEleList} colorList={this.state.colorsList} />
