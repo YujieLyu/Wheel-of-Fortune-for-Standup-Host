@@ -17,21 +17,18 @@ class ElementList extends Component {
                 const allList = res.data;
                 this.setState({ allList });
             });
-        console.log('here is all list: ' + this.state.allList);
-    }
-
-    componentDidUpdate(){
+        // console.log('here is all list: ' + this.state.allList);
         axios.get('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/candidates')
             .then(res => {
                 const pieList = res.data;
                 this.setState({ pieList });
             })
-            console.log(this.state.pieList.length);
+            // console.log(this.state.pieList.length);
     }
 
     handleChange = (id) => {
         this.props.reSetElementList(id)
-        console.log(id)
+        // console.log(id)
     }
 
     createList() {

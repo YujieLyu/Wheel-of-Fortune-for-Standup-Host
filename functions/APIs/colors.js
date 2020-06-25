@@ -4,13 +4,13 @@ const { response } = require('express');
 exports.getColors = (request, response) => {
     db
         .collection('colors')
-        .orderBy('hex', 'asc')
+        .orderBy('colorID', 'asc')
         .get()
         .then((data) => {
             let colors = [];
             data.forEach(ele => {
                 colors.push({
-                    id: ele.id,
+                    id: ele.data().colorID,
                     hex: ele.data().hex
                 });
             });
