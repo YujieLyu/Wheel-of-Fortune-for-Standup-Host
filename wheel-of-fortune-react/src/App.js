@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+// import API from './utils/API'
 import './default.scss';
 
 import LeftBox from './LeftBox/ElementList';
@@ -7,26 +8,26 @@ import RightBox from './RightBox/RightBox';
 
 
 class App extends Component {
-  state = {
-    colorsList: [
-      '#fd6363',
-      '#fa9d5f',
-      '#fac248',
-      '#f8de6b',
-      '#cbf779',
-      '#73fdad',
-      '#5cfadd',
-      '#60c8f8',
-      '#60a7f8',
-      '#6f71f8',
-      '#a27dfa',
-      '#c07dfa',
-      '#f391fc',
-      '#f860be',
-      '#f51d9b',
+  // state = {
+  //   colorsList: [
+  //     '#fd6363',
+  //     '#fa9d5f',
+  //     '#fac248',
+  //     '#f8de6b',
+  //     '#cbf779',
+  //     '#73fdad',
+  //     '#5cfadd',
+  //     '#60c8f8',
+  //     '#60a7f8',
+  //     '#6f71f8',
+  //     '#a27dfa',
+  //     '#c07dfa',
+  //     '#f391fc',
+  //     '#f860be',
+  //     '#f51d9b',
 
-    ]
-  }
+  //   ]
+  // }
 
   reSetElementList = (id) => {
     console.log(id)
@@ -73,7 +74,9 @@ class App extends Component {
               />
           </div>
           <div className="col-sm">
-            <MidBox pieEleList={this.state.pieEleList} colorList={this.state.colorsList} />
+            <MidBox 
+            // pieEleList={this.state.pieEleList} colorList={this.state.colorsList} 
+            />
           </div>
           <div className="col-sm">
             <RightBox shuffleWheel={this.shuffleWheel} />

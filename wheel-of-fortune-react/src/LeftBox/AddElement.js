@@ -11,7 +11,7 @@ class AddElement extends Component {
         const newCandidate = {
             name: this.state.name
         }
-        axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/new', { newCandidate })
+        axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/new', newCandidate)
             .then(res => {
                 console.log(res);
                 console.log(res.data)
