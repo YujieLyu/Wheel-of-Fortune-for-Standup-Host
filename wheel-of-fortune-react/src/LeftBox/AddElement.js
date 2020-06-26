@@ -16,9 +16,9 @@ class AddElement extends Component {
                 console.log(res);
                 console.log(res.data)
             })
-        // if (this.state.name !== '') {
-        //     // this.props.addElement(this.state);
-        // }
+        if (this.state.name !== '') {
+            this.props.addElement(this.state);
+        }
         this.setState({
             name: ''
         })

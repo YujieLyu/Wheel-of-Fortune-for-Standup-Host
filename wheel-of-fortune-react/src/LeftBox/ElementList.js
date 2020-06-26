@@ -46,7 +46,12 @@ class ElementList extends Component {
     }
 
     addElement = (newEle) => {
-        this.props.addElement(newEle);
+        let updatedAllList=[...this.state.allList,newEle];
+        let updatedPieList=[...this.state.pieList,newEle];
+        this.setState({
+            allList:updatedAllList,
+            pieList:updatedPieList
+        })
     }
 
     render() {
