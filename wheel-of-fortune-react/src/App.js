@@ -24,7 +24,6 @@ class App extends Component {
         this.setState({ allList });
       });
 
-
     axios.get('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/candidates')
       .then(res => {
         const pieList = res.data;

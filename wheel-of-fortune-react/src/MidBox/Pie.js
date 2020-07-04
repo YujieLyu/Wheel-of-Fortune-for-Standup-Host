@@ -7,11 +7,9 @@ class Pie extends Component {
         degree: null
     }
 
-
-
     createPie() {
         let pieList = [...this.props.pieList]
-        let colorsList=[...this.props.colorsList]
+        let colorsList = [...this.props.colorsList]
         let sliceAngle, skewValue;
         sliceAngle = 360 / pieList.length;
         skewValue = sliceAngle + 90;

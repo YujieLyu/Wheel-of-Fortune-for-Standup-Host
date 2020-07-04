@@ -19,7 +19,7 @@ class AddElement extends Component {
                 console.log(res);
                 console.log(res.data)
             })
-       
+
         this.setState({
             name: ''
         })

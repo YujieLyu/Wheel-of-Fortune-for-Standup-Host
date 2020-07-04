@@ -17,7 +17,7 @@ class ElementList extends Component {
             allList.map(ele =>
                 <div key={ele.id}>
                     <input type="checkbox"
-                       checked={this.props.pieList.filter(e=>e.name===ele.name).length>0}
+                        checked={this.props.pieList.filter(e => e.name === ele.name).length > 0}
                         onChange={() => { this.handleChange(ele.id) }} ></input>
                     <label htmlFor={ele.id}>{ele.name}</label>
                 </div>
@@ -26,14 +26,14 @@ class ElementList extends Component {
             </div>)
     }
 
-    addElement = (newEle) => {
-        let updatedAllList=[...this.props.allList,newEle];
-        let updatedPieList=[...this.props.pieList,newEle];
-        this.setState({
-            allList:updatedAllList,
-            pieList:updatedPieList
-        })
-    }
+    // addElement = (newEle) => {
+    //     let updatedAllList = [...this.props.allList, newEle];
+    //     let updatedPieList = [...this.props.pieList, newEle];
+    //     this.setState({
+    //         allList: updatedAllList,
+    //         pieList: updatedPieList
+    //     })
+    // }
 
     render() {
         return (
@@ -42,7 +42,7 @@ class ElementList extends Component {
                 <p>(Ver 2.1.1.dev1.200621_beta)</p>
                 <p>No less than 3 options</p>
                 {this.createList()}
-                <AddElement addElement={this.addElement} />
+                <AddElement addElement={this.props.addElement} />
             </div>
         )
     }
