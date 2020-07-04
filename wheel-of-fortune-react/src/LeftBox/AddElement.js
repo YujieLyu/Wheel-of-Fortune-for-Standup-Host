@@ -11,14 +11,15 @@ class AddElement extends Component {
         const newCandidate = {
             name: this.state.name
         }
+        if (this.state.name !== '') {
+            this.props.addElement(newCandidate);
+        }
         axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/new', newCandidate)
             .then(res => {
                 console.log(res);
                 console.log(res.data)
             })
-        if (this.state.name !== '') {
-            this.props.addElement(this.state);
-        }
+       
         this.setState({
             name: ''
         })

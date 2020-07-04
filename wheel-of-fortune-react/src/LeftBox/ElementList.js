@@ -6,48 +6,29 @@ import AddElement from './AddElement';
 
 class ElementList extends Component {
 
-    state = {
-        allList: [],
-        pieList: []
-    }
-
-    componentDidMount() {
-        axios.get('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/all')
-            .then(res => {
-                const allList = res.data;
-                this.setState({ allList });
-            });
-   
-   
-        axios.get('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/candidates')
-            .then(res => {
-                const pieList = res.data;
-                this.setState({ pieList });
-            })
-          
-    }
-
     handleChange = (id) => {
         this.props.reSetElementList(id)
         // console.log(id)
     }
 
     createList() {
-        let elementList = [...this.state.allList];
-        return elementList.length > 0 ? (
-            elementList.map(ele =>
+        let allList = [...this.props.allList];
+        return allList.length > 0 ? (
+            allList.map(ele =>
                 <div key={ele.id}>
                     <input type="checkbox"
-                       checked={this.state.pieList.filter(e=>e.name===ele.name).length>0}
+                       checked={this.props.pieList.filter(e=>e.name===ele.name).length>0}
                         onChange={() => { this.handleChange(ele.id) }} ></input>
                     <label htmlFor={ele.id}>{ele.name}</label>
                 </div>
-            )) : (null)
+            )) : (<div>
+                Loading...
+            </div>)
     }
 
     addElement = (newEle) => {
-        let updatedAllList=[...this.state.allList,newEle];
-        let updatedPieList=[...this.state.pieList,newEle];
+        let updatedAllList=[...this.props.allList,newEle];
+        let updatedPieList=[...this.props.pieList,newEle];
         this.setState({
             allList:updatedAllList,
             pieList:updatedPieList

@@ -4,46 +4,32 @@ import './midBox.scss';
 
 class Pie extends Component {
     state = {
-        degree: null,
-        pieList: [],
-        colorList: []
+        degree: null
     }
 
-    componentDidMount() {
 
-        axios.get('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/candidates')
-            .then(res => {
-                const pieList = res.data;
-                this.setState({ pieList });
-            })
-
-        axios.get('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/colors')
-            .then(res => {
-                const colorList = res.data;
-                this.setState({ colorList })
-            })
-
-            
-    }
 
     createPie() {
-        let pieEleList = [...this.state.pieList]
+        let pieList = [...this.props.pieList]
+        let colorsList=[...this.props.colorsList]
         let sliceAngle, skewValue;
-        sliceAngle = 360 / pieEleList.length;
+        sliceAngle = 360 / pieList.length;
         skewValue = sliceAngle + 90;
         // console.log(this.state.colorList)
 
-        return pieEleList.length > 0 ? (
-            pieEleList.map((ele, i) =>
+        return pieList.length > 0 && colorsList.length > 0 ? (
+            pieList.map((ele, i) =>
                 (<div key={ele.id}>
                     <li className="midBoxPie__pieSlice" style={{
                         transform: 'rotate(' + sliceAngle * i + 'deg) skewY(' + skewValue + 'deg)',
-                        background: this.state.colorList[i].hex
+                        background: colorsList[i].hex
                     }}>
-                        <div className="midBoxPie__pieSliceName" style={{ transform: 'skewY(' + (180 - skewValue) + 'deg) rotate(' + sliceAngle / 2 + 'deg)' }}>{pieEleList[i].name}</div>
+                        <div className="midBoxPie__pieSliceName" style={{ transform: 'skewY(' + (180 - skewValue) + 'deg) rotate(' + sliceAngle / 2 + 'deg)' }}>{pieList[i].name}</div>
                     </li>
                 </div >)
-            )) : (null);
+            )) : (<div>
+                Loading...
+            </div>);
     }
 
     handleClick = () => {
@@ -53,7 +39,7 @@ class Pie extends Component {
         this.setState({
             degree: deg
         })
-        
+
         // let deg = Math.floor(100000 + Math.random()  * 90000);
     }
 
