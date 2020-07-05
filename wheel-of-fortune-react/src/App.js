@@ -12,7 +12,6 @@ class App extends Component {
     allList: [],
     pieList: [],
     colorsList: [],
-    originCandidate: []
   }
 
   componentDidMount() {
@@ -26,7 +25,6 @@ class App extends Component {
       .then(res => {
         const pieList = res.data;
         this.setState({ pieList });
-        this.setState({ originCandidate: pieList })
       })
 
     axios.get('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/colors')
