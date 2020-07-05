@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import './default.scss';
 import axios from 'axios';
-
 import LeftBox from './LeftBox/ElementList';
 import MidBox from './MidBox/Pie';
 import RightBox from './RightBox/RightBox';
-
 
 
 class App extends Component {
@@ -39,21 +37,24 @@ class App extends Component {
 
   }
 
-  reSetElementList = (id) => {
-    console.log(id)
+  reSetElementList = (name) => {
 
-    const updatedPieList = this.state.pieList.filter(ele => ele.id === id).length > 0 ? (
-      this.state.pieList.filter(ele => {
-        return ele.id !== id
-      })
+    let pieList = [...this.state.pieList];
 
+    const updatedPieList = pieList.some(ele => ele.name === name) ? (
+      pieList.length >= 4 ? (pieList.filter(ele => {
+        return ele.name !== name
+      })) : (
+        pieList
+        )
     ) : (
-        [...this.state.pieList, this.state.allList.find(ele => ele.id === id)]
+        [...pieList, this.state.allList.find(ele => ele.name === name)]
+
       )
     this.setState({
       pieList: updatedPieList
     })
-    // axios.post
+
   }
 
   addElement = (newEle) => {
@@ -69,7 +70,7 @@ class App extends Component {
   shuffleWheel = () => {
     let updatedList = [...this.state.pieList];
     this.setState({
-      pieEleList: updatedList.sort(() => Math.random() - 0.5)
+      pieList: updatedList.sort(() => Math.random() - 0.5)
     })
   }
 

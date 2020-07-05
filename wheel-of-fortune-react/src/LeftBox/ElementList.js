@@ -6,9 +6,8 @@ import AddElement from './AddElement';
 
 class ElementList extends Component {
 
-    handleChange = (id) => {
-        this.props.reSetElementList(id)
-        // console.log(id)
+    handleChange = (name) => {
+        this.props.reSetElementList(name)
     }
 
     createList() {
@@ -18,7 +17,7 @@ class ElementList extends Component {
                 <div key={ele.id}>
                     <input type="checkbox"
                         checked={this.props.pieList.filter(e => e.name === ele.name).length > 0}
-                        onChange={() => { this.handleChange(ele.id) }} ></input>
+                        onChange={() => { this.handleChange(ele.name) }} ></input>
                     <label htmlFor={ele.id}>{ele.name}</label>
                 </div>
             )) : (<div>
