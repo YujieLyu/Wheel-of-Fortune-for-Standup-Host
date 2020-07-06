@@ -16,8 +16,11 @@ class ElementList extends Component {
                 <div key={ele.id}>
                     <input type="checkbox"
                         checked={this.props.pieList.filter(e => e.name === ele.name).length > 0}
-                        onChange={() => { this.handleChange(ele.name) }} ></input>
+                        onChange={() => { this.handleChange(ele.name) }} >
+                          
+                        </input>
                     <label htmlFor={ele.id}>{ele.name}</label>
+                    
                 </div>
             )) : (<div>
                 Loading...
@@ -37,7 +40,7 @@ class ElementList extends Component {
         return (
             <div className="LeftBox">
                 <h3>Customize the wheel</h3>
-                <p>(Ver 2.1.1.dev1.200621_beta)</p>
+                <p>(Ver 2.2.0.dev1.200705_beta)</p>
                 <p>No less than 3 options</p>
                 {this.createList()}
                 <AddElement addElement={this.props.addElement} />

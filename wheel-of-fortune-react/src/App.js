@@ -30,9 +30,9 @@ class App extends Component {
     axios.get('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/colors')
       .then(res => {
         const colorsList = res.data;
-        this.setState({ colorsList: colorsList })
+        this.setState({ colorsList })
       })
-
+    console.log(this.state.pieList)
   }
 
   reSetElementList = (name) => {
@@ -43,17 +43,24 @@ class App extends Component {
       pieList.length >= 4 ? (pieList.filter(ele => {
         return ele.name !== name
       })) : (
-        pieList
+          pieList
         )
     ) : (
-        [...pieList, this.state.allList.find(ele => ele.name === name)]
 
+        [...pieList, this.state.allList.find(ele => ele.name === name)]
       )
     this.setState({
       pieList: updatedPieList
     })
 
   }
+
+  updateCan = () => {
+    this.state.pieList.map(ele => axios.delete('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/delete-can', { data: ele }))
+    this.state.allList.map(ele => axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/update-can', ele))
+
+  }
+
 
   addElement = (newEle) => {
     newEle.id = this.state.allList.length;
@@ -86,7 +93,9 @@ class App extends Component {
           </div>
           <div className="col-sm">
             <MidBox
-              pieList={this.state.pieList} colorsList={this.state.colorsList}
+              pieList={this.state.pieList}
+              colorsList={this.state.colorsList}
+              updateCan={this.updateCan}
             />
           </div>
           <div className="col-sm">
