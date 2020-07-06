@@ -32,10 +32,16 @@ class Pie extends Component {
 
     alertHost = (deg) => {
         let dist = 360 - (deg % 360);
-        let host=Math.floor(dist*this.props.pieList.length/360);
-        let hostName=this.props.pieList[host].name;
-        axios.post()
-        alert("Congrat, "+hostName+"! You're the host of next stand-up")
+        let host = Math.floor(dist * this.props.pieList.length / 360);
+        let hostName = this.props.pieList[host].name;
+        console.log(this.props.pieList)
+        console.log(this.props.pieList[host].id)
+        const deleteCan = {
+            id: this.props.pieList[host].id
+        }
+        console.log(deleteCan)
+        axios.delete('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/delete-can', {data: deleteCan});
+        alert("Congrats, " + hostName + "! You will run the next stand-up")
         // console.log();
     }
 
@@ -46,12 +52,12 @@ class Pie extends Component {
         this.setState({
             degree: deg
         })
-        setTimeout(()=>this.alertHost(deg),5500);
+        setTimeout(() => this.alertHost(deg), 5500);
 
         // let deg = Math.floor(100000 + Math.random()  * 90000);
     }
 
-  
+
 
     render() {
         return (
