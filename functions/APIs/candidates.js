@@ -46,7 +46,7 @@ exports.getCandidates = (request, response) => {
 }
 
 
-exports.addCandidate = (request, response) => {
+exports.addNew = (request, response) => {
     if (request.body.name.trim() === '') {
         return response.status(400).json({ name: 'Must not be empty' })
     }
@@ -66,5 +66,49 @@ exports.addCandidate = (request, response) => {
         .catch((err) => {
             response.status(500).json({ error: err });
             console.error(err);
+        });
+}
+
+exports.updateCan = (request, response) => {
+    if (request.body.name.trim() === '') {
+        return response.status(400).json({ name: 'Must not be empty' })
+    }
+
+    const updateCandidate = {
+        name: request.body.name
+    }
+
+    db
+        .collection('standup-candidates')
+        .add(updateCandidate)
+        .then((doc) => {
+            const responseUpdateCandidate = updateCandidate;
+            responseUpdateCandidate.id = doc.id;
+            return response.json(responseUpdateCandidate);
+        })
+        .catch((err) => {
+            response.status(500).json({ error: err });
+            console.error(err);
+        });
+}
+
+
+exports.deleteCan = (request, response) => {
+    const document = db.collection('standup-candidates').doc(request.body.id);
+    // return response.body.id;
+    document
+        .get()
+        .then((doc) => {
+            if (!doc.exists) {
+                return response.status(404).json({ error: "candidate not found"});
+            }
+            return document.delete();
+        })
+        .then(() => {
+            response.json({ message: 'delete successfully' })
+        })
+        .catch((err) => {
+            console.error(err);
+            return response.status(500).json({ error: err.code });
         });
 }
