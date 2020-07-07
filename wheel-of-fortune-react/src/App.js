@@ -12,6 +12,7 @@ class App extends Component {
     allList: [],
     pieList: [],
     colorsList: [],
+    originCan:[]
   }
 
   componentDidMount() {
@@ -24,7 +25,10 @@ class App extends Component {
     axios.get('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/candidates')
       .then(res => {
         const pieList = res.data;
-        this.setState({ pieList });
+        this.setState({ 
+          pieList,
+          originCan:pieList
+         });
       })
 
     axios.get('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/colors')
@@ -55,7 +59,7 @@ class App extends Component {
 
   }
 
-  updateCan = () => {
+  resetCan = () => {
     this.state.pieList.map(ele => axios.delete('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/delete-can', { data: ele }))
     this.state.allList.map(ele => axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/update-can', ele))
 
@@ -94,8 +98,9 @@ class App extends Component {
           <div className="col-sm">
             <MidBox
               pieList={this.state.pieList}
+              originCan={this.state.originCan}
               colorsList={this.state.colorsList}
-              updateCan={this.updateCan}
+              updateCan={this.resetCan}
             />
           </div>
           <div className="col-sm">

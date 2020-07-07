@@ -4,7 +4,8 @@ import './midBox.scss';
 
 class Pie extends Component {
     state = {
-        degree: null
+        degree: null,
+        host:null
     }
 
     createPie() {
@@ -34,11 +35,13 @@ class Pie extends Component {
         let dist = 360 - (deg % 360);
         let host = Math.floor(dist * this.props.pieList.length / 360);
         let hostName = this.props.pieList[host].name;
-        this.handleDetele(host);
+        this.setState({host});
+        
         console.log(this.props.pieList)
         console.log(this.props.pieList[host].id)
 
-        alert("Congrats, " + hostName + "! You will run the next stand-up")
+         alert("Congrats, " + hostName + "! You will run the next stand-up")
+       
         // console.log();
     }
 
@@ -50,7 +53,7 @@ class Pie extends Component {
             console.log("delete" + deleteCan)
             axios.delete('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/delete-can', { data: deleteCan });
         } else {
-            this.props.updateCan();
+            this.props.resetCan();
             axios.delete('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/delete-can', { data: deleteCan });
         }
     }
@@ -64,7 +67,8 @@ class Pie extends Component {
         })
         setTimeout(() => this.alertHost(deg), 5500);
 
-        // let deg = Math.floor(100000 + Math.random()  * 90000);
+        this.props.originCan.map(ele=>axios.delete('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/delete-can',{data:ele}));
+        this.props.pieList.map(ele=>axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/new',ele))
     }
 
 
