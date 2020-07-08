@@ -29,6 +29,11 @@ const {
 
 app.get('/candidates', getCandidates);
 
+const {
+    getRetroCan
+} = require('./APIs/candidates');
+
+app.get('/retro', getRetroCan);
 
 const {
     addNew

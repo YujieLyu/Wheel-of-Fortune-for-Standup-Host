@@ -45,6 +45,27 @@ exports.getCandidates = (request, response) => {
         })
 }
 
+exports.getRetroCan = (request, response) => {
+
+    db
+        .collection('sirius-retro')
+        .orderBy('name', 'asc')
+        .get()
+        .then((data) => {
+            let candidates = [];
+            data.forEach(ele => {
+                candidates.push({
+                    id: ele.id,
+                    name: ele.data().name
+                });
+            });
+            return response.json(candidates);
+        })
+        .catch(err => {
+            console.error(err);
+            return response.status(500).json({ error: err.code });
+        })
+}
 
 exports.addNew = (request, response) => {
     if (request.body.name.trim() === '') {
