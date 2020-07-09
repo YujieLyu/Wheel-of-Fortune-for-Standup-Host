@@ -70,15 +70,27 @@ class Pie extends Component {
         // console.log(this.props.originCan);
 
         const pieList = this.props.pieList;
-        const originCan = this.props.originCan;
+        const originPieList = this.props.originPieList;
+        
+        // switch(this.props.mode){
+        //     case "Standup":
+        //         originPieList.map(ele => axios.delete('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/delete-can', { data: ele }));
+        //         break;
+        //     case "Retro":
+                
+        //         break;
+        //     case "Sprint-planning":
+               
+        //         break;
+        // }
 
-        originCan.map(ele => axios.delete('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/delete-can', { data: ele }));
-        if (pieList >= 4) {
-            console.log(this.props.pieList);
-            pieList.map(ele => axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/update-can', ele))
-        } else {
-            this.props.resetCan();
-        }
+        
+        // if (pieList >= 4) {
+        //     console.log(this.props.pieList);
+        //     pieList.map(ele => axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/update-can', ele))
+        // } else {
+        //     this.props.resetCan();
+        // }
         console.log(this.props.pieList);
     }
 

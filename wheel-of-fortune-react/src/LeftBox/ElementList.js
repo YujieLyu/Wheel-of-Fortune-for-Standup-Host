@@ -5,6 +5,7 @@ import AddElement from './AddElement';
 
 class ElementList extends Component {
 
+
     handleChange = (name) => {
         this.props.reSetElementList(name)
     }
@@ -17,10 +18,8 @@ class ElementList extends Component {
                     <input type="checkbox"
                         checked={this.props.pieList.filter(e => e.name === ele.name).length > 0}
                         onChange={() => { this.handleChange(ele.name) }} >
-                          
-                        </input>
+                    </input>
                     <label htmlFor={ele.id}>{ele.name}</label>
-                    
                 </div>
             )) : (<div>
                 Loading...
@@ -39,8 +38,11 @@ class ElementList extends Component {
     render() {
         return (
             <div className="LeftBox">
-                <h3>Customize the wheel</h3>
-                <p>(Ver 2.2.0.dev1.200705_beta)</p>
+                <h3>{this.props.mode} Wheel</h3>
+                <p>(Ver 3.0.0.dev1.2007010_beta)</p>
+                <button className="shuffleButton" onClick={this.props.shuffleWheel}>
+                    Shuffle the wheel
+                </button>
                 <p>No less than 3 options</p>
                 {this.createList()}
                 <AddElement addElement={this.props.addElement} />

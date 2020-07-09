@@ -9,9 +9,10 @@ import RightBox from './RightBox/RightBox';
 class App extends Component {
 
   state = {
-    wheelName: 'Standup',
+    mode: 'Standup',
     allList: [],
     pieList: [],
+    originPieList: [],
     standupList: [],
     retroList: [],
     spriintPlanList: [],
@@ -54,23 +55,32 @@ class App extends Component {
   }
 
   determinePieList = (mode) => {
-    this.setState({ wheelName: mode })
+    this.setState({ mode })
     switch (mode) {
       case 'Standup':
-        this.setState({ pieList: [...this.state.standupList] });
+        this.setState({
+          pieList: [...this.state.standupList],
+          originPieList: [...this.state.standupList]
+        });
         console.log(this.state.pieList)
         break;
       case 'Retro':
-        this.setState({ pieList: [...this.state.retroList] });
+        this.setState({
+          pieList: [...this.state.retroList],
+          originPieList: [...this.state.retroList]
+        });
         break;
       case 'Sprint-planning':
-        this.setState({ pieList: [...this.state.spriintPlanList] })
+        this.setState({
+          pieList: [...this.state.spriintPlanList],
+          originPieList: [...this.state.spriintPlanList]
+        })
     }
   }
 
   reSetElementList = (name) => {
 
-    let pieList = [...this.state.standupList];
+    let pieList = [...this.state.pieList];
 
     const updatedPieList = pieList.some(ele => ele.name === name) ? (
       pieList.length >= 4 ? (pieList.filter(ele => {
@@ -94,7 +104,7 @@ class App extends Component {
 
   addElement = (newEle) => {
     newEle.id = this.state.allList.length;
-    let updatedPieList = [...this.state.standupList, newEle];
+    let updatedPieList = [...this.state.pieList, newEle];
     let updatedAllList = [...this.state.allList, newEle];
     this.setState({
       pieList: updatedPieList,
@@ -115,7 +125,7 @@ class App extends Component {
         <div className="row">
           <div className="col-sm">
             <LeftBox
-              wheelName={this.state.wheelName}
+              mode={this.state.mode}
               allList={this.state.allList}
               pieList={this.state.pieList}
               reSetElementList={this.reSetElementList}
@@ -128,6 +138,7 @@ class App extends Component {
               pieList={this.state.pieList}
               colorsList={this.state.colorsList}
               resetCan={this.resetCan}
+              mode={this.state.mode}
             />
           </div>
           <div className="col-sm">

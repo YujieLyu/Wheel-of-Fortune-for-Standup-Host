@@ -16,55 +16,49 @@ const cors = require('cors');
 app.use(cors());
 
 
-const {
-    getAll
-} = require('./APIs/candidates');
+const { getAll } = require('./APIs/candidates');
 
 app.get('/all', getAll);
 
-
-const {
-    getStandupCan
-} = require('./APIs/candidates');
+const { getStandupCan } = require('./APIs/candidates');
 
 app.get('/standup', getStandupCan);
 
-const {
-    getRetroCan
-} = require('./APIs/candidates');
+const { getRetroCan } = require('./APIs/candidates');
 
 app.get('/retro', getRetroCan);
 
-const{
-    getSprintPlanCan
-}=require('./APIs/candidates')
+const { getSprintPlanCan } = require('./APIs/candidates')
 
-app.get('/sprint-plan',getSprintPlanCan)
+app.get('/sprint-plan', getSprintPlanCan)
 
-const {
-    addNew
-} = require('./APIs/candidates');
+const { addNew } = require('./APIs/candidates');
 
 app.post('/new', addNew);
 
 
-const {
-    updateCan
-} = require('./APIs/candidates');
+const { updateCan } = require('./APIs/candidates');
 
 app.post('/update-can', updateCan);
 
+const { deleteCan } = require('./APIs/candidates');
 
-const {
-    deleteCan
-} = require('./APIs/candidates');
+app.delete('/delete', deleteCan);
 
-app.delete('/delete-can', deleteCan);
+// const { deleteStandupCan } = require('./APIs/candidates');
+
+// app.delete('/delete-standup', deleteStandupCan);
+
+// const { deleteRetroCan } = require('./APIs/candidates');
+
+// app.delete('/delete-retro', deleteRetroCan);
+
+// const { deleteSprintPlanCan } = require('./APIs/candidates');
+
+// app.delete('/delete-sprintplan', deleteSprintPlanCan);
 
 
-const {
-    getColors
-} = require('./APIs/colors');
+const { getColors } = require('./APIs/colors');
 
 app.get('/colors', getColors)
 
