@@ -9,10 +9,13 @@ import RightBox from './RightBox/RightBox';
 class App extends Component {
 
   state = {
+    wheelName: 'Standup',
     allList: [],
     pieList: [],
-    colorsList: [],
-    originCan:[]
+    standupList: [],
+    retroList: [],
+    spriintPlanList: [],
+    colorsList: []
   }
 
   componentDidMount() {
@@ -22,26 +25,52 @@ class App extends Component {
         this.setState({ allList });
       });
 
-    axios.get('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/candidates')
-      .then(res => {
-        const pieList = res.data;
-        this.setState({ 
-          pieList,
-          originCan:pieList
-         });
-      })
-
     axios.get('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/colors')
       .then(res => {
         const colorsList = res.data;
         this.setState({ colorsList })
       })
-    console.log(this.state.pieList)
+
+    axios.get('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/standup')
+      .then(res => {
+        const standupList = res.data;
+        this.setState({
+          standupList,
+          pieList: standupList
+        });
+      })
+
+    axios.get('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/retro')
+      .then(res => {
+        const retroList = res.data;
+        this.setState({ retroList })
+      })
+
+    axios.get('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/sprint-plan')
+      .then(res => {
+        const spriintPlanList = res.data;
+        this.setState({ spriintPlanList })
+      })
+  }
+
+  determinePieList = (mode) => {
+    this.setState({ wheelName: mode })
+    switch (mode) {
+      case 'Standup':
+        this.setState({ pieList: [...this.state.standupList] });
+        console.log(this.state.pieList)
+        break;
+      case 'Retro':
+        this.setState({ pieList: [...this.state.retroList] });
+        break;
+      case 'Sprint-planning':
+        this.setState({ pieList: [...this.state.spriintPlanList] })
+    }
   }
 
   reSetElementList = (name) => {
 
-    let pieList = [...this.state.pieList];
+    let pieList = [...this.state.standupList];
 
     const updatedPieList = pieList.some(ele => ele.name === name) ? (
       pieList.length >= 4 ? (pieList.filter(ele => {
@@ -50,7 +79,6 @@ class App extends Component {
           pieList
         )
     ) : (
-
         [...pieList, this.state.allList.find(ele => ele.name === name)]
       )
     this.setState({
@@ -60,15 +88,13 @@ class App extends Component {
   }
 
   resetCan = () => {
-    this.state.pieList.map(ele => axios.delete('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/delete-can', { data: ele }))
     this.state.allList.map(ele => axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/update-can', ele))
-
   }
 
 
   addElement = (newEle) => {
     newEle.id = this.state.allList.length;
-    let updatedPieList = [...this.state.pieList, newEle];
+    let updatedPieList = [...this.state.standupList, newEle];
     let updatedAllList = [...this.state.allList, newEle];
     this.setState({
       pieList: updatedPieList,
@@ -89,22 +115,23 @@ class App extends Component {
         <div className="row">
           <div className="col-sm">
             <LeftBox
+              wheelName={this.state.wheelName}
               allList={this.state.allList}
               pieList={this.state.pieList}
               reSetElementList={this.reSetElementList}
               addElement={this.addElement}
+              shuffleWheel={this.shuffleWheel}
             />
           </div>
           <div className="col-sm">
             <MidBox
               pieList={this.state.pieList}
-              originCan={this.state.originCan}
               colorsList={this.state.colorsList}
-              updateCan={this.resetCan}
+              resetCan={this.resetCan}
             />
           </div>
           <div className="col-sm">
-            <RightBox shuffleWheel={this.shuffleWheel} />
+            <RightBox determinePieList={this.determinePieList} />
           </div>
         </div>
       </div>

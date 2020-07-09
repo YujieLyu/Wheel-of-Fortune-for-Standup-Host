@@ -3,9 +3,10 @@
 .MidBox {
     @include flexCenter();
     position: relative;
+    margin-top: 25%;
     width: 40rem;
     height: 40rem;
-    top: 10%;
+    // top: 10%;
     &::after {
         position: absolute;
         content: "";
