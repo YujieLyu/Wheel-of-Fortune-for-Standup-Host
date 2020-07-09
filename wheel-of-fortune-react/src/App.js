@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import './default.scss';
 import axios from 'axios';
-
 import LeftBox from './LeftBox/ElementList';
 import MidBox from './MidBox/Pie';
 import RightBox from './RightBox/RightBox';
-
 
 
 class App extends Component {
@@ -14,7 +12,6 @@ class App extends Component {
     allList: [],
     pieList: [],
     colorsList: [],
-    originCandidate: []
   }
 
   componentDidMount() {
@@ -24,38 +21,46 @@ class App extends Component {
         this.setState({ allList });
       });
 
-
     axios.get('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/candidates')
       .then(res => {
         const pieList = res.data;
         this.setState({ pieList });
-        this.setState({ originCandidate: pieList })
       })
 
     axios.get('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/colors')
       .then(res => {
         const colorsList = res.data;
-        this.setState({ colorsList: colorsList })
+        this.setState({ colorsList })
       })
-
+    console.log(this.state.pieList)
   }
 
-  reSetElementList = (id) => {
-    console.log(id)
+  reSetElementList = (name) => {
 
-    const updatedPieList = this.state.pieList.filter(ele => ele.id === id).length > 0 ? (
-      this.state.pieList.filter(ele => {
-        return ele.id !== id
-      })
+    let pieList = [...this.state.pieList];
 
+    const updatedPieList = pieList.some(ele => ele.name === name) ? (
+      pieList.length >= 4 ? (pieList.filter(ele => {
+        return ele.name !== name
+      })) : (
+          pieList
+        )
     ) : (
-        [...this.state.pieList, this.state.allList.find(ele => ele.id === id)]
+
+        [...pieList, this.state.allList.find(ele => ele.name === name)]
       )
     this.setState({
       pieList: updatedPieList
     })
-    // axios.post
+
   }
+
+  updateCan = () => {
+    this.state.pieList.map(ele => axios.delete('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/delete-can', { data: ele }))
+    this.state.allList.map(ele => axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/update-can', ele))
+
+  }
+
 
   addElement = (newEle) => {
     newEle.id = this.state.allList.length;
@@ -70,7 +75,7 @@ class App extends Component {
   shuffleWheel = () => {
     let updatedList = [...this.state.pieList];
     this.setState({
-      pieEleList: updatedList.sort(() => Math.random() - 0.5)
+      pieList: updatedList.sort(() => Math.random() - 0.5)
     })
   }
 
@@ -88,7 +93,9 @@ class App extends Component {
           </div>
           <div className="col-sm">
             <MidBox
-              pieList={this.state.pieList} colorsList={this.state.colorsList}
+              pieList={this.state.pieList}
+              colorsList={this.state.colorsList}
+              updateCan={this.updateCan}
             />
           </div>
           <div className="col-sm">

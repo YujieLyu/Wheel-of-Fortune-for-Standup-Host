@@ -17,7 +17,7 @@ app.use(cors());
 
 
 const {
-    getAll
+    getAll, deleteCandidate
 } = require('./APIs/candidates');
 
 app.get('/all', getAll);
@@ -31,10 +31,24 @@ app.get('/candidates', getCandidates);
 
 
 const {
-    addCandidate
+    addNew
 } = require('./APIs/candidates');
 
-app.post('/new', addCandidate);
+app.post('/new', addNew);
+
+
+const {
+    updateCan
+} = require('./APIs/candidates');
+
+app.post('/update-can', updateCan);
+
+
+const {
+    deleteCan
+} = require('./APIs/candidates');
+
+app.delete('/delete-can', deleteCan);
 
 
 const {

@@ -7,11 +7,9 @@ class Pie extends Component {
         degree: null
     }
 
-
-
     createPie() {
         let pieList = [...this.props.pieList]
-        let colorsList=[...this.props.colorsList]
+        let colorsList = [...this.props.colorsList]
         let sliceAngle, skewValue;
         sliceAngle = 360 / pieList.length;
         skewValue = sliceAngle + 90;
@@ -32,6 +30,31 @@ class Pie extends Component {
             </div>);
     }
 
+    alertHost = (deg) => {
+        let dist = 360 - (deg % 360);
+        let host = Math.floor(dist * this.props.pieList.length / 360);
+        let hostName = this.props.pieList[host].name;
+        this.handleDetele(host);
+        console.log(this.props.pieList)
+        console.log(this.props.pieList[host].id)
+
+        alert("Congrats, " + hostName + "! You will run the next stand-up")
+        // console.log();
+    }
+
+    handleDetele = (host) => {
+        const deleteCan = {
+            id: this.props.pieList[host].id
+        }
+        if (this.props.pieList.length >= 4) {
+            console.log("delete" + deleteCan)
+            axios.delete('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/delete-can', { data: deleteCan });
+        } else {
+            this.props.updateCan();
+            axios.delete('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/delete-can', { data: deleteCan });
+        }
+    }
+
     handleClick = () => {
         let x = 1024;
         let y = 60204;
@@ -39,9 +62,12 @@ class Pie extends Component {
         this.setState({
             degree: deg
         })
+        setTimeout(() => this.alertHost(deg), 5500);
 
         // let deg = Math.floor(100000 + Math.random()  * 90000);
     }
+
+
 
     render() {
         return (
