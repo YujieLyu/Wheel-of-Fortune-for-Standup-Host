@@ -4,7 +4,7 @@ const { response } = require('express');
 exports.getAll = (request, response) => {
 
     db
-        .collection('standup-sirius')
+        .collection('sirius-all')
         .orderBy('name', 'asc')
         .get()
         .then((data) => {
@@ -23,10 +23,10 @@ exports.getAll = (request, response) => {
         })
 }
 
-exports.getCandidates = (request, response) => {
+exports.getStandupCan = (request, response) => {
 
     db
-        .collection('standup-candidates')
+        .collection('sirius-standup')
         .orderBy('name', 'asc')
         .get()
         .then((data) => {
@@ -49,6 +49,28 @@ exports.getRetroCan = (request, response) => {
 
     db
         .collection('sirius-retro')
+        .orderBy('name', 'asc')
+        .get()
+        .then((data) => {
+            let candidates = [];
+            data.forEach(ele => {
+                candidates.push({
+                    id: ele.id,
+                    name: ele.data().name
+                });
+            });
+            return response.json(candidates);
+        })
+        .catch(err => {
+            console.error(err);
+            return response.status(500).json({ error: err.code });
+        })
+}
+
+exports.getSprintPlanCan = (request, response) => {
+
+    db
+        .collection('sirius-sprint-plan')
         .orderBy('name', 'asc')
         .get()
         .then((data) => {

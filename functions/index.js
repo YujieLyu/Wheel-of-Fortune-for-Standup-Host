@@ -17,23 +17,29 @@ app.use(cors());
 
 
 const {
-    getAll, deleteCandidate
+    getAll
 } = require('./APIs/candidates');
 
 app.get('/all', getAll);
 
 
 const {
-    getCandidates
+    getStandupCan
 } = require('./APIs/candidates');
 
-app.get('/candidates', getCandidates);
+app.get('/standup', getStandupCan);
 
 const {
     getRetroCan
 } = require('./APIs/candidates');
 
 app.get('/retro', getRetroCan);
+
+const{
+    getSprintPlanCan
+}=require('./APIs/candidates')
+
+app.get('/sprint-plan',getSprintPlanCan)
 
 const {
     addNew
