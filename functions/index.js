@@ -36,6 +36,9 @@ const { addNew } = require('./APIs/candidates');
 
 app.post('/new', addNew);
 
+const { addStandupHost } = require('./APIs/candidates');
+
+app.post('/add-standup-host', addStandupHost);
 
 const { updateCan } = require('./APIs/candidates');
 

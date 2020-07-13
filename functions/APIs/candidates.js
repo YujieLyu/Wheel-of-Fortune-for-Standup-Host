@@ -116,6 +116,29 @@ exports.addNew = (request, response) => {
         });
 }
 
+exports.addStandupHost = (request, response) => {
+    if (request.body.name.trim() === '') {
+        return response.status(400).json({ name: 'Must not be empty' })
+    }
+
+    const newHost = {
+        name: request.body.name
+    }
+
+    db
+        .collection('sirius-standup-hosts')
+        .add(newHost)
+        .then((doc) => {
+            const responseNewHost = newHost;
+            responseNewHost.id = doc.id;
+            return response.json(responseNewHost);
+        })
+        .catch((err) => {
+            response.status(500).json({ error: err });
+            console.error(err);
+        });
+}
+
 exports.updateCan = (request, response) => {
     if (request.body.name.trim() === '') {
         return response.status(400).json({ name: 'Must not be empty' })
