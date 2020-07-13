@@ -4,7 +4,8 @@ import './midBox.scss';
 
 class Pie extends Component {
     state = {
-        degree: null
+        degree: null,
+        host: null
     }
 
     createPie() {
@@ -34,26 +35,28 @@ class Pie extends Component {
         let dist = 360 - (deg % 360);
         let host = Math.floor(dist * this.props.pieList.length / 360);
         let hostName = this.props.pieList[host].name;
-        this.handleDetele(host);
+        this.setState({ host });
+
         console.log(this.props.pieList)
         console.log(this.props.pieList[host].id)
 
         alert("Congrats, " + hostName + "! You will run the next stand-up")
+
         // console.log();
     }
 
-    handleDetele = (host) => {
-        const deleteCan = {
-            id: this.props.pieList[host].id
-        }
-        if (this.props.pieList.length >= 4) {
-            console.log("delete" + deleteCan)
-            axios.delete('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/delete-can', { data: deleteCan });
-        } else {
-            this.props.updateCan();
-            axios.delete('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/delete-can', { data: deleteCan });
-        }
-    }
+    // handleDetele = (host) => {
+    //     const deleteCan = {
+    //         id: this.props.pieList[host].id
+    //     }
+    //     if (this.props.pieList.length >= 4) {
+    //         console.log("delete" + deleteCan)
+    //         axios.delete('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/delete-can', { data: deleteCan });
+    //     } else {
+    //         this.props.resetCan();
+    //         axios.delete('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/delete-can', { data: deleteCan });
+    //     }
+    // }
 
     handleClick = () => {
         let x = 1024;
@@ -64,7 +67,31 @@ class Pie extends Component {
         })
         setTimeout(() => this.alertHost(deg), 5500);
 
-        // let deg = Math.floor(100000 + Math.random()  * 90000);
+        // console.log(this.props.originCan);
+
+        const pieList = this.props.pieList;
+        const originPieList = this.props.originPieList;
+        
+        // switch(this.props.mode){
+        //     case "Standup":
+        //         originPieList.map(ele => axios.delete('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/delete-can', { data: ele }));
+        //         break;
+        //     case "Retro":
+                
+        //         break;
+        //     case "Sprint-planning":
+               
+        //         break;
+        // }
+
+        
+        // if (pieList >= 4) {
+        //     console.log(this.props.pieList);
+        //     pieList.map(ele => axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/update-can', ele))
+        // } else {
+        //     this.props.resetCan();
+        // }
+        console.log(this.props.pieList);
     }
 
 
