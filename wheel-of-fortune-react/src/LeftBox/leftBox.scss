@@ -25,17 +25,15 @@
 
     .addBtn {
         background-color: white;
-        color: #6f71f8;
-        border: 1.5px solid #6f71f8;
+        color: #60c8f8;
+        border: 1.5px solid #60c8f8;
         padding: 1px 10px;
-        // text-align: center;
-        // display: inline-block;
         font-family: monospace;
         margin: 6px 0;
         transition-duration: 0.4s;
         cursor: pointer;
         &:hover {
-            background-color: #6f71f8;
+            background-color: #60c8f8;
             color: white;
         }
         &:focus {

@@ -36,7 +36,15 @@ class Pie extends Component {
         let host = Math.floor(dist * this.props.pieList.length / 360);
         let hostName = this.props.pieList[host].name;
         this.setState({ host });
+        const newHost={
+            name:hostName
+        }
 
+        axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/add-standup-host', newHost)
+            .then(res => {
+                console.log(res);
+                console.log(res.data)
+            })
         console.log(this.props.pieList)
         console.log(this.props.pieList[host].id)
 
