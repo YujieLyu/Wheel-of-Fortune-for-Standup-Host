@@ -35,9 +35,11 @@ class App extends Component {
     axios.get('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/standup')
       .then(res => {
         const standupList = res.data;
+    
         this.setState({
           standupList,
-          pieList: standupList
+          pieList: standupList,
+          originPieList:standupList
         });
       })
 
@@ -52,6 +54,13 @@ class App extends Component {
         const spriintPlanList = res.data;
         this.setState({ spriintPlanList })
       })
+
+
+      // this.setState({
+      //   originPieList:this.standupList
+      // })
+
+      console.log(this.pieList)
   }
 
   determinePieList = (mode) => {
@@ -136,6 +145,7 @@ class App extends Component {
           <div className="col-sm">
             <MidBox
               pieList={this.state.pieList}
+              originPieList={this.state.originPieList}
               colorsList={this.state.colorsList}
               resetCan={this.resetCan}
               mode={this.state.mode}

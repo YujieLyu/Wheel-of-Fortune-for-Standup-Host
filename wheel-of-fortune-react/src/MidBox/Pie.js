@@ -40,11 +40,11 @@ class Pie extends Component {
             name:hostName
         }
 
-        axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/add-standup-host', newHost)
-            .then(res => {
-                console.log(res);
-                console.log(res.data)
-            })
+        // axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/add-standup-host', newHost)
+        //     .then(res => {
+        //         console.log(res);
+        //         console.log(res.data)
+        //     })
         console.log(this.props.pieList)
         console.log(this.props.pieList[host].id)
 
@@ -75,22 +75,36 @@ class Pie extends Component {
         })
         setTimeout(() => this.alertHost(deg), 5500);
 
-        // console.log(this.props.originCan);
-
+        
         const pieList = this.props.pieList;
         const originPieList = this.props.originPieList;
+
+        console.log(pieList);
+        console.log(originPieList)
         
-        // switch(this.props.mode){
-        //     case "Standup":
-        //         originPieList.map(ele => axios.delete('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/delete-can', { data: ele }));
-        //         break;
-        //     case "Retro":
-                
-        //         break;
-        //     case "Sprint-planning":
-               
-        //         break;
-        // }
+        switch(this.props.mode){
+            case "Standup":
+                originPieList.map(ele => 
+                    // console.log(ele)
+                    axios.delete('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/delete-standup',  {data: ele} )
+                    );
+                pieList.map(ele=>axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/update-can', ele))
+                break;
+            case "Retro":
+                originPieList.map(ele => 
+                    // console.log(ele)
+                    axios.delete('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/delete-retro',  {data: ele} )
+                    );
+                pieList.map(ele=>axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/update-can', ele))
+                 break;
+            case "Sprint-planning":
+                originPieList.map(ele => 
+                    // console.log(ele)
+                    axios.delete('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/delete-sprintplan',  {data: ele} )
+                    );
+                pieList.map(ele=>axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/update-can', ele))
+                 break;
+        }
 
         
         // if (pieList >= 4) {
@@ -100,6 +114,7 @@ class Pie extends Component {
         //     this.props.resetCan();
         // }
         console.log(this.props.pieList);
+        console.log( this.props.originPieList);
     }
 
 
