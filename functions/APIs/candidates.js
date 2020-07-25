@@ -113,6 +113,30 @@ exports.addNew = (request, response) => {
         .catch((err) => {
             response.status(500).json({ error: err });
             console.error(err);
+        });    
+}
+
+exports.addStandupHost = (request, response) => {
+    if (request.body.name.trim() === '') {
+        return response.status(400).json({ name: 'Must not be empty' })
+    }
+
+    const newHost = {
+        name: request.body.name,
+        time: new Date()
+    }
+
+    db
+        .collection('sirius-standup-hosts')
+        .add(newHost)
+        .then((doc) => {
+            const responseNewHost = newHost;
+            responseNewHost.id = doc.id;
+            return response.json(responseNewHost);
+        })
+        .catch((err) => {
+            response.status(500).json({ error: err });
+            console.error(err);
         });
 }
 
@@ -127,6 +151,20 @@ exports.updateCan = (request, response) => {
     }
 
     switch (request.body.mode) {
+        // case "test":
+        //     db
+        //         .collection('standup-sirius')
+        //         .add(updateCandidate)
+        //         .then((doc) => {
+        //             const responseUpdateCandidate = updateCandidate;
+        //             responseUpdateCandidate.id = doc.id;
+        //             return response.json(responseUpdateCandidate);
+        //         })
+        //         .catch((err) => {
+        //             response.status(500).json({ error: err });
+        //             console.error(err);
+        //         });
+        //     break;
         case "standup":
             db
                 .collection('sirius-standup')
@@ -155,7 +193,7 @@ exports.updateCan = (request, response) => {
                     console.error(err);
                 });
             break;
-        case "sprint-plan":
+        case "plan":
             db
                 .collection('sirius-sprint-plan')
                 .add(updateCandidate)
@@ -173,26 +211,48 @@ exports.updateCan = (request, response) => {
 
 }
 
+// exports.deleteCan = (request, response) => {
+       
+//     const document = {};
 
-exports.deleteCan = (request, response) => {
+//     switch (request.body.mode) {
+//         case "all":
+//             document = db.collection('standup-sirius').doc(request.body.id);
+//             break;
+//         case "standup":
+//             document = db.collection('sirius-standup').doc(request.body.id);
+//             break;
+//         case "retro":
+//             document = db.collection('sirius-retro').doc(request.body.id);
+//             break;
+//         case "sprint-plan":
+//             document = db.collection('sirius-sprint-plan').doc(request.body.id);
+//             break;
+//     }
 
-    const document = null;
+//     document
+//         .get()
+//         .then((doc) => {
+//             if (!doc.exists) {
+//                 return response.status(404).json({ error: "candidate not found" });
+//             }
+//             return document.delete();
+//         })
+//         .then(() => {
+//             response.json({ message: 'delete successfully' })
+//         })
+//         .catch((err) => {
+//             console.error(err);
+//             return response.status(500).json({ error: err.code, id:request.body.id });
+//         });
+// }
 
-    switch (request.body.mode) {
-        case "all":
-            document = db.collection('sirius-all').doc(request.body.id);
-            break;
-        case "standup":
-            document = db.collection('sirius-standup').doc(request.body.id);
-            break;
-        case "retro":
-            document = db.collection('sirius-retro').doc(request.body.id);
-            break;
-        case "sprint-plan":
-            document = db.collection('sirius-sprint-plan').doc(request.body.id);
-            break;
-    }
 
+
+
+exports.deleteTest = (request, response) => {
+    const document = db.collection('standup-sirius').doc(request.body.id);
+    // return response.body.id;
     document
         .get()
         .then((doc) => {
@@ -206,66 +266,68 @@ exports.deleteCan = (request, response) => {
         })
         .catch((err) => {
             console.error(err);
-            return response.status(500).json({ error: err.code, id:request.body.id });
+            return response.status(500).json({ error: err.code });
         });
 }
 
-// exports.deleteStandupCan = (request, response) => {
-//     const document = db.collection('sirius-standup').doc(request.body.id);
-//     // return response.body.id;
-//     document
-//         .get()
-//         .then((doc) => {
-//             if (!doc.exists) {
-//                 return response.status(404).json({ error: "candidate not found" });
-//             }
-//             return document.delete();
-//         })
-//         .then(() => {
-//             response.json({ message: 'delete successfully' })
-//         })
-//         .catch((err) => {
-//             console.error(err);
-//             return response.status(500).json({ error: err.code });
-//         });
-// }
 
-// exports.deleteRetroCan = (request, response) => {
-//     const document = db.collection('sirius-retro').doc(request.body.id);
-//     // return response.body.id;
-//     document
-//         .get()
-//         .then((doc) => {
-//             if (!doc.exists) {
-//                 return response.status(404).json({ error: "candidate not found" });
-//             }
-//             return document.delete();
-//         })
-//         .then(() => {
-//             response.json({ message: 'delete successfully' })
-//         })
-//         .catch((err) => {
-//             console.error(err);
-//             return response.status(500).json({ error: err.code });
-//         });
-// }
 
-// exports.deleteSprintPlanCan = (request, response) => {
-//     const document = db.collection('sirius-sprint-plan').doc(request.body.id);
-//     // return response.body.id;
-//     document
-//         .get()
-//         .then((doc) => {
-//             if (!doc.exists) {
-//                 return response.status(404).json({ error: "candidate not found" });
-//             }
-//             return document.delete();
-//         })
-//         .then(() => {
-//             response.json({ message: 'delete successfully' })
-//         })
-//         .catch((err) => {
-//             console.error(err);
-//             return response.status(500).json({ error: err.code });
-//         });
-// }
+exports.deleteStandupCan = (request, response) => {
+    const document = db.collection('sirius-standup').doc(request.body.id);
+    // return response.body.id;
+    document
+        .get()
+        .then((doc) => {
+            if (!doc.exists) {
+                return response.status(404).json({ error: "candidate not found" });
+            }
+            return document.delete();
+        })
+        .then(() => {
+            response.json({ message: 'delete successfully' })
+        })
+        .catch((err) => {
+            console.error(err);
+            return response.status(500).json({ error: err.code });
+        });
+}
+
+exports.deleteRetroCan = (request, response) => {
+    const document = db.collection('sirius-retro').doc(request.body.id);
+    // return response.body.id;
+    document
+        .get()
+        .then((doc) => {
+            if (!doc.exists) {
+                return response.status(404).json({ error: "candidate not found" });
+            }
+            return document.delete();
+        })
+        .then(() => {
+            response.json({ message: 'delete successfully' })
+        })
+        .catch((err) => {
+            console.error(err);
+            return response.status(500).json({ error: err.code });
+        });
+}
+
+exports.deleteSprintPlanCan = (request, response) => {
+    const document = db.collection('sirius-sprint-plan').doc(request.body.id);
+    // return response.body.id;
+    document
+        .get()
+        .then((doc) => {
+            if (!doc.exists) {
+                return response.status(404).json({ error: "candidate not found" });
+            }
+            return document.delete();
+        })
+        .then(() => {
+            response.json({ message: 'delete successfully' })
+        })
+        .catch((err) => {
+            console.error(err);
+            return response.status(500).json({ error: err.code });
+        });
+}

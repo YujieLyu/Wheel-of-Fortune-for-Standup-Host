@@ -5,7 +5,7 @@ class AddElement extends Component {
     state = {
         name: ''
     }
-
+//for git test
     handleSubmit = (e) => {
         e.preventDefault();
         const newCandidate = {
