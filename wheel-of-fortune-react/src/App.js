@@ -35,11 +35,11 @@ class App extends Component {
     axios.get('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/standup')
       .then(res => {
         const standupList = res.data;
-    
+
         this.setState({
           standupList,
           pieList: standupList,
-          originPieList:standupList
+          originPieList: standupList
         });
       })
 
@@ -56,50 +56,71 @@ class App extends Component {
       })
 
 
-      // this.setState({
-      //   originPieList:this.standupList
-      // })
+    // this.setState({
+    //   originPieList:this.standupList
+    // })
 
-      console.log(this.pieList)
+    // console.log(this.pieList)
   }
 
   determinePieList = (mode) => {
     this.setState({ mode })
     switch (mode) {
-      case 'Standup':
+      case 'standup':
         this.setState({
           pieList: [...this.state.standupList],
           originPieList: [...this.state.standupList]
         });
         console.log(this.state.pieList)
         break;
-      case 'Retro':
+      case 'retro':
         this.setState({
           pieList: [...this.state.retroList],
           originPieList: [...this.state.retroList]
         });
         break;
-      case 'Sprint-planning':
+      case 'sprint-planning':
         this.setState({
           pieList: [...this.state.spriintPlanList],
           originPieList: [...this.state.spriintPlanList]
-        })
+        });
+        break;
+      default:
+        console.log('cannot get mode for determine')
     }
   }
 
-  reSetElementList = (name) => {
+  reSetElementList = (name, mode) => {
 
-    let pieList = [...this.state.pieList];
+    const pieList = [...this.state.pieList];
+    let updatedPieList;
 
-    const updatedPieList = pieList.some(ele => ele.name === name) ? (
-      pieList.length >= 4 ? (pieList.filter(ele => {
-        return ele.name !== name
-      })) : (
-          pieList
-        )
-    ) : (
-        [...pieList, this.state.allList.find(ele => ele.name === name)]
-      )
+    if (pieList.some(ele => ele.name === name)) {
+      if (pieList.length >= 4) {
+        updatedPieList = pieList.filter(ele => {
+          return ele.name !== name
+        })
+      } else {
+        updatedPieList = pieList
+      }
+    } else {
+      console.log(this.state.allList);
+      let newCan = this.state.allList.find(ele => ele.name === name);
+      newCan.mode = mode;
+      // newCan.forEach(ele=>ele.mode=mode)
+      updatedPieList = [...pieList, newCan]
+    }
+
+
+    // const updatedPieList = pieList.some(ele => ele.name === name) ? (
+    //   pieList.length >= 4 ? (pieList.filter(ele => {
+    //     return ele.name !== name
+    //   })) : (
+    //       pieList
+    //     )
+    // ) : (
+    //   [...pieList, this.state.allList.find(ele => ele.name === name)]
+    //   )
     this.setState({
       pieList: updatedPieList
     })
