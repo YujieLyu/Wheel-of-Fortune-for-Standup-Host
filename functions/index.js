@@ -13,7 +13,7 @@ const { response } = require('express');
 
 //without cors, frontend can't retreive data
 const cors = require('cors');
-app.use(cors());
+app.use(cors({ origin: true }));
 
 
 const { getAll } = require('./APIs/candidates');
@@ -39,6 +39,14 @@ app.post('/new', addNew);
 const { addStandupHost } = require('./APIs/candidates');
 
 app.post('/add-standup-host', addStandupHost);
+
+const { addRetroHost } = require('./APIs/candidates');
+
+app.post('/add-retro-host', addRetroHost);
+
+const { addPlanHost } = require('./APIs/candidates');
+
+app.post('/add-plan-host', addPlanHost);
 
 const { updateCan } = require('./APIs/candidates');
 

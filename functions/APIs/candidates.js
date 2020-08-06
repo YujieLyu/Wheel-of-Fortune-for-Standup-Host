@@ -73,7 +73,7 @@ exports.getRetroCan = (request, response) => {
 exports.getSprintPlanCan = (request, response) => {
 
     db
-        .collection('sirius-sprint-plan')
+        .collection('sirius-sprintplan')
         .orderBy('name', 'asc')
         .get()
         .then((data) => {
@@ -140,6 +140,54 @@ exports.addStandupHost = (request, response) => {
         });
 }
 
+exports.addRetroHost = (request, response) => {
+    if (request.body.name.trim() === '') {
+        return response.status(400).json({ name: 'Must not be empty' })
+    }
+
+    const newHost = {
+        name: request.body.name,
+        time: new Date()
+    }
+
+    db
+        .collection('sirius-retro-hosts')
+        .add(newHost)
+        .then((doc) => {
+            const responseNewHost = newHost;
+            responseNewHost.id = doc.id;
+            return response.json(responseNewHost);
+        })
+        .catch((err) => {
+            response.status(500).json({ error: err });
+            console.error(err);
+        });
+}
+
+exports.addPlanHost = (request, response) => {
+    if (request.body.name.trim() === '') {
+        return response.status(400).json({ name: 'Must not be empty' })
+    }
+
+    const newHost = {
+        name: request.body.name,
+        time: new Date()
+    }
+
+    db
+        .collection('sirius-plan-hosts')
+        .add(newHost)
+        .then((doc) => {
+            const responseNewHost = newHost;
+            responseNewHost.id = doc.id;
+            return response.json(responseNewHost);
+        })
+        .catch((err) => {
+            response.status(500).json({ error: err });
+            console.error(err);
+        });
+}
+
 exports.updateCan = (request, response) => {
     if (request.body.name.trim() === '') {
         return response.status(400).json({ name: 'Must not be empty' })
@@ -151,20 +199,6 @@ exports.updateCan = (request, response) => {
     }
 
     switch (request.body.mode) {
-        // case "test":
-        //     db
-        //         .collection('standup-sirius')
-        //         .add(updateCandidate)
-        //         .then((doc) => {
-        //             const responseUpdateCandidate = updateCandidate;
-        //             responseUpdateCandidate.id = doc.id;
-        //             return response.json(responseUpdateCandidate);
-        //         })
-        //         .catch((err) => {
-        //             response.status(500).json({ error: err });
-        //             console.error(err);
-        //         });
-        //     break;
         case "standup":
             db
                 .collection('sirius-standup')
@@ -195,7 +229,7 @@ exports.updateCan = (request, response) => {
             break;
         case "plan":
             db
-                .collection('sirius-sprint-plan')
+                .collection('sirius-sprintplan')
                 .add(updateCandidate)
                 .then((doc) => {
                     const responseUpdateCandidate = updateCandidate;
@@ -207,6 +241,8 @@ exports.updateCan = (request, response) => {
                     console.error(err);
                 });
             break;
+            default:
+                response.json({message:'cannot get the mode'})
     }
 
 }
@@ -313,7 +349,7 @@ exports.deleteRetroCan = (request, response) => {
 }
 
 exports.deleteSprintPlanCan = (request, response) => {
-    const document = db.collection('sirius-sprint-plan').doc(request.body.id);
+    const document = db.collection('sirius-sprintplan').doc(request.body.id);
     // return response.body.id;
     document
         .get()
