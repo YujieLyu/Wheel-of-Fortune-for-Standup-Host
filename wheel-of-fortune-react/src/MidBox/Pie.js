@@ -107,28 +107,29 @@ class Pie extends Component {
             case "standup":
                 console.log('here is the delete');
                 console.log(originPieList)
-                originPieList.map(async ele =>
+                originPieList.forEach(ele =>
                     // console.log(ele)
-                    await axios.delete('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/delete-standup',
-                        { data: ele })
+                    axios.delete('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/delete-standup',
+                        { data: ele }).catch(err => console.log(err))
                 );
-                console.log('here is the post');
-                console.log(pieList)
-                pieList.map(async ele => await axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/update-can', ele))
+                pieList.forEach(ele => axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/update-can', ele)
+                    .catch(err => console.log(err))
+
+                )
                 break;
             case "retro":
-                originPieList.map(ele =>
+                originPieList.forEach(ele =>
                     // console.log(ele)
                     axios.delete('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/delete-retro', { data: ele })
                 );
-                pieList.map(ele => axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/update-can', ele))
+                pieList.forEach(ele => axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/update-can', ele))
                 break;
             case "plan":
-                originPieList.map(ele =>
+                originPieList.forEach(ele =>
                     // console.log(ele)
                     axios.delete('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/delete-sprintplan', { data: ele })
                 );
-                pieList.map(ele => axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/update-can', ele))
+                pieList.forEach(ele => axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/update-can', ele))
                 break;
             default:
                 console.log('cannot get the mode for pie');
