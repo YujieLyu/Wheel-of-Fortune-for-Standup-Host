@@ -1,95 +1,14 @@
-@import '../default.scss';
+@import "../app.scss";
 
 .RightBox {
-    @include flexCenter();
-    position: absolute;
-    width: 20rem;
-    height: 40rem;
-    right: 100px;
-    margin-top: 25%;
+  @include flexCenter();
+  position: absolute;
+  width: 20rem;
+  height: 40rem;
+  right: 100px;
+  margin-top: 25%;
 
-    .btnGroup{
-        margin-right: auto;
-    
-        .standupBtn{
-            background-color: white;
-            width: 250px;
-            color: #6f71f8;
-            border: 2px solid #6f71f8;
-            border-radius: 8px;
-            padding: 8px 20px;
-            text-align: center;
-            display: block;
-            font-size: 20px;
-            font-family: monospace;
-            margin: 25px 30px;
-            cursor: pointer;
-            &:hover {
-                background-color: #6f71f8;
-                color: white;
-            }
-            &:disabled {
-                background-color: #6f71f8;
-                color: white;
-            }
-            &:focus {
-                outline: 0 !important;
-            }
-        }
-        .retroBtn{
-            background-color: white;
-            width: 250px;
-            color: #fac248;
-            border: 2px solid #fac248;
-            border-radius: 8px;
-            padding: 8px 20px;
-            text-align: center;
-            display: block;
-            font-size: 20px;
-            font-family: monospace;
-            margin: 25px 30px;
-            transition-duration: 0.4s;
-            cursor: pointer;
-            &:hover {
-                background-color: #fac248;
-                color: white;
-            }
-            &:disabled {
-                background-color: #fac248;
-                color: white;
-            }
-            &:focus {
-                outline: 0 !important;
-            }
-        }
-        .sprintPlanBtn{
-            background-color: white;
-            width: 250px;
-            color: #f51d9b;
-            border: 2px solid #f51d9b;
-            border-radius: 8px;
-            padding: 8px 20px;
-            text-align: center;
-            display: block;
-            font-size: 20px;
-            font-family: monospace;
-            margin: 25px 30px;
-            transition-duration: 0.4s;
-            cursor: pointer;
-            &:hover {
-                background-color: #f51d9b;
-                color: white;
-            }
-            &:disabled {
-                background-color: #f51d9b;
-                color: white;
-            }
-            &:focus {
-                outline: 0 !important;
-            }
-        }
-    }
-
-    
-
+  .btnGroup {
+    margin-right: auto;
+  }
 }

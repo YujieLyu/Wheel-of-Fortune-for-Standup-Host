@@ -1,0 +1,21 @@
+li {
+    overflow: hidden;
+    position: absolute;
+    top: -20%;
+    right: -20%;
+    width: 70%;
+    height: 70%;
+    transform-origin: 0% 100%;
+}
+.slice-name{
+    position: absolute;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    font-family: monospace;
+    font-weight: bold;
+    left: -100%;
+    width: 200%;
+    height: 200%;
+    text-align: center;
+    padding-top: 200px;
+}      

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import CustomButton from '../components/CustomButton/customButton';
 import './rightBox.scss'
 
 class RightBox extends Component {
@@ -13,6 +14,7 @@ class RightBox extends Component {
     handleClick = (e) => {
         console.log(e.target.value)
         this.props.determinePieList(e.target.value)
+
         // e.target.disabled = e.target.disabled ? false : true;
         switch (e.target.value) {
             case "standup":
@@ -36,8 +38,8 @@ class RightBox extends Component {
                     sprintPlanBtn: true
                 });
                 break;
-                default:
-                    console.log('cannot get the mode for button')
+            default:
+                console.log('cannot get the mode for button')
         }
     }
 
@@ -46,12 +48,12 @@ class RightBox extends Component {
         return (
             <div className="RightBox">
                 <div className="btnGroup">
-                    <button className="standupBtn" value="standup" disabled={this.state.standupBtn}
-                        onClick={this.handleClick}>Standup</button>
-                    <button className="retroBtn" value="retro" disabled={this.state.retroBtn}
-                        onClick={this.handleClick}>Retro</button>
-                    <button className="sprintPlanBtn" value="sprint-planning" disabled={this.state.sprintPlanBtn}
-                        onClick={this.handleClick}>Sprint Planning</button>
+                    <CustomButton value="standup" isOn={this.state.standupBtn}
+                        handleClick={this.handleClick} name="Standup"/>
+                    <CustomButton value="retro" isOn={this.state.retroBtn}
+                        handleClick={this.handleClick} name="Retro"/>
+                    <CustomButton value="sprint-planning" isOn={this.state.sprintPlanBtn}
+                        handleClick={this.handleClick} name="Sprint Planning" />
                 </div>
 
             </div>
