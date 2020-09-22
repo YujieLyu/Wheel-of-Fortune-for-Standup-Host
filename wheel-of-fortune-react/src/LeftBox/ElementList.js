@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './leftBox.scss';
 
 import AddElement from './AddElement';
+import CustomButton from '../components/CustomButton/customButton';
 
 class ElementList extends Component {
 
@@ -40,9 +41,11 @@ class ElementList extends Component {
             <div className="LeftBox">
                 <h3>{this.props.mode} Wheel</h3>
                 <p>(Ver 3.0.0.dev1.2007010_beta)</p>
-                <button className="shuffleButton" onClick={this.props.shuffleWheel}>
-                    Shuffle the wheel
-                </button>
+                <CustomButton
+                    value="origin"
+                    name="Shuffle the wheel"
+                    handleClick={this.props.shuffleWheel}
+                />
                 <p>No less than 3 options</p>
                 {this.createList()}
                 <AddElement addElement={this.props.addElement} />

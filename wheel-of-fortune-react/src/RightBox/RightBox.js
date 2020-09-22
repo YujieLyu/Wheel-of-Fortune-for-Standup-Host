@@ -48,12 +48,21 @@ class RightBox extends Component {
         return (
             <div className="RightBox">
                 <div className="btnGroup">
-                    <CustomButton value="standup" isOn={this.state.standupBtn}
-                        handleClick={this.handleClick} name="Standup"/>
-                    <CustomButton value="retro" isOn={this.state.retroBtn}
-                        handleClick={this.handleClick} name="Retro"/>
-                    <CustomButton value="sprint-planning" isOn={this.state.sprintPlanBtn}
-                        handleClick={this.handleClick} name="Sprint Planning" />
+                    <CustomButton
+                        value="standup"
+                        isOn={this.state.standupBtn}
+                        handleClick={this.handleClick}
+                        name="Standup" />
+                    <CustomButton
+                        value="retro"
+                        isOn={this.state.retroBtn}
+                        handleClick={this.handleClick}
+                        name="Retro" />
+                    <CustomButton
+                        value="sprint-planning"
+                        isOn={this.state.sprintPlanBtn}
+                        handleClick={this.handleClick}
+                        name="Sprint Planning" />
                 </div>
 
             </div>

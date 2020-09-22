@@ -131,32 +131,26 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <div className="row">
-          <div className="col-sm">
-            <LeftBox
-              mode={this.state.mode}
-              allList={this.state.allList}
-              pieList={this.state.pieList}
-              reSetElementList={this.reSetElementList}
-              addElement={this.addElement}
-              shuffleWheel={this.shuffleWheel}
-            />
-          </div>
-          <div className="col-sm">
-            <MidBox
-              pieList={this.state.pieList}
-              originPieList={this.state.originPieList}
-              colorsList={this.state.colorsList}
-              resetCan={this.resetCan}
-              mode={this.state.mode}
-            />
-          </div>
-          <div className="col-sm">
-            <RightBox determinePieList={this.determinePieList} />
-          </div>
-        </div>
+      <div className="app">
+        <LeftBox
+          mode={this.state.mode}
+          allList={this.state.allList}
+          pieList={this.state.pieList}
+          reSetElementList={this.reSetElementList}
+          addElement={this.addElement}
+          shuffleWheel={this.shuffleWheel}
+        />
+        <MidBox
+          pieList={this.state.pieList}
+          originPieList={this.state.originPieList}
+          colorsList={this.state.colorsList}
+          resetCan={this.resetCan}
+          mode={this.state.mode}
+        />
+        <RightBox determinePieList={this.determinePieList} />
       </div>
+
+
     );
   }
 

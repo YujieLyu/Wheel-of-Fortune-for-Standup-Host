@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import FormInput from '../components/FormInput/formInput'
 
 class AddElement extends Component {
     state = {
@@ -29,15 +30,16 @@ class AddElement extends Component {
         this.setState({
             name: e.target.value
         })
-        // console.log(this.state)
     }
 
     render() {
         return (
             <div className="addElementForm">
                 <form onSubmit={this.handleSubmit}>
-                    <input type="text" onChange={this.handleChange} value={this.state.name}></input>
-                    <button className="addBtn">Add New Candidate</button>
+                    <FormInput 
+                    handleChange={this.handleChange} 
+                    value={this.state.name} 
+                    label="Add new candidate"/>
                 </form>
             </div>
         )

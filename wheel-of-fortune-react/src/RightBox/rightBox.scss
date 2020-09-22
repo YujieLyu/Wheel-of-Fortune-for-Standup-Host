@@ -1,12 +1,13 @@
 @import "../app.scss";
 
 .RightBox {
-  @include flexCenter();
-  position: absolute;
+  // @include flexCenter();
+  // position: absolute;
+  display: inline-block;
   width: 20rem;
   height: 40rem;
   right: 100px;
-  margin-top: 25%;
+  margin:20% 5%;
 
   .btnGroup {
     margin-right: auto;
