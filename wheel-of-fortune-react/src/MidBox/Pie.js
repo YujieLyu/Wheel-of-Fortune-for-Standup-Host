@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import './midBox.scss';
+import './pie.scss';
+import Slice from '../components/Slice/Slice';
 
 class Pie extends Component {
     state = {
@@ -14,18 +15,19 @@ class Pie extends Component {
         let sliceAngle, skewValue;
         sliceAngle = 360 / pieList.length;
         skewValue = sliceAngle + 90;
-        // console.log(this.props.pieList)
 
         return pieList.length > 0 && colorsList.length > 0 ? (
             pieList.map((ele, i) =>
-                (<div key={ele.id}>
-                    <li className="midBoxPie__pieSlice" style={{
-                        transform: 'rotate(' + sliceAngle * i + 'deg) skewY(' + skewValue + 'deg)',
-                        background: colorsList[i].hex
-                    }}>
-                        <div className="midBoxPie__pieSliceName" style={{ transform: 'skewY(' + (180 - skewValue) + 'deg) rotate(' + sliceAngle / 2 + 'deg)' }}>{pieList[i].name}</div>
-                    </li>
-                </div >)
+                (
+                    <Slice key={i}
+                        sliceAngle={sliceAngle}
+                        index={i}
+                        skewValue={skewValue}
+                        pieListEle={ele}
+                        colorListEle={colorsList[i]}
+                    />
+
+                )
             )) : (<div>
                 Loading...
             </div>);
@@ -39,8 +41,7 @@ class Pie extends Component {
         const newHost = {
             name: hostName
         }
-        console.log('new host is ')
-        console.log(newHost)
+        console.log('new host is ',newHost)
         switch (this.props.pieList[host].mode) {
             case "standup":
                 axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/add-standup-host', newHost)
@@ -65,28 +66,9 @@ class Pie extends Component {
                 break;
         }
 
-
-        console.log(this.props.pieList)
-        console.log(this.props.pieList[host].id)
-
-        alert("Congrats, " + hostName + "! You will run the next stand-up")
-
-        // console.log();
+        alert(`Congrats, ${hostName} ! You will run the next stand-up`)
     }
-
-    // handleDetele = (host) => {
-    //     const deleteCan = {
-    //         id: this.props.pieList[host].id
-    //     }
-    //     if (this.props.pieList.length >= 4) {
-    //         console.log("delete" + deleteCan)
-    //         axios.delete('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/delete-can', { data: deleteCan });
-    //     } else {
-    //         this.props.resetCan();
-    //         axios.delete('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/delete-can', { data: deleteCan });
-    //     }
-    // }
-
+Ï
     handleClick = () => {
         let x = 1024;
         let y = 60204;
@@ -100,35 +82,35 @@ class Pie extends Component {
         const pieList = this.props.pieList;
         const originPieList = this.props.originPieList;
 
-        console.log(pieList);
-        console.log(originPieList)
-
         switch (pieList[0].mode) {
             case "standup":
-                console.log('here is the delete');
-                console.log(originPieList)
-                originPieList.map(async ele =>
-                    // console.log(ele)
-                    await axios.delete('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/delete-standup',
+                originPieList.forEach(ele =>
+                    axios.delete('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/delete-standup',
                         { data: ele })
+                        .then((res) => console.log(res))
+                        .catch(err => console.log(err))
                 );
-                console.log('here is the post');
-                console.log(pieList)
-                pieList.map(async ele => await axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/update-can', ele))
+                pieList.forEach(ele => axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/update-can', ele)
+                    .catch(err => console.log(err))
+                )
                 break;
             case "retro":
-                originPieList.map(ele =>
+                originPieList.forEach(ele =>
                     // console.log(ele)
                     axios.delete('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/delete-retro', { data: ele })
+                        .then((res) => console.log(res))
+                        .catch(err => console.log(err))
                 );
-                pieList.map(ele => axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/update-can', ele))
+                pieList.forEach(ele => axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/update-can', ele))
                 break;
             case "plan":
-                originPieList.map(ele =>
+                originPieList.forEach(ele =>
                     // console.log(ele)
                     axios.delete('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/delete-sprintplan', { data: ele })
+                        .then((res) => console.log(res))
+                        .catch(err => console.log(err))
                 );
-                pieList.map(ele => axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/update-can', ele))
+                pieList.forEach(ele => axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/update-can', ele))
                 break;
             default:
                 console.log('cannot get the mode for pie');
@@ -150,10 +132,10 @@ class Pie extends Component {
     render() {
         return (
             <div className="MidBox" >
-                <ul className="midBoxPie" id="pie" style={{ transform: 'rotate(' + this.state.degree + 'deg)' }}>
+                <ul className="pie" id="pie" style={{ transform: 'rotate(' + this.state.degree + 'deg)' }}>
                     {this.createPie()}
                 </ul>
-                <button className="midBoxSpin" onClick={this.handleClick}>GO</button>
+                <button className="spin" onClick={this.handleClick}>GO</button>
             </div>
         )
     }

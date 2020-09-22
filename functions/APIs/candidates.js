@@ -140,53 +140,53 @@ exports.addStandupHost = (request, response) => {
         });
 }
 
-exports.addRetroHost = (request, response) => {
-    if (request.body.name.trim() === '') {
-        return response.status(400).json({ name: 'Must not be empty' })
-    }
+// exports.addRetroHost = (request, response) => {
+//     if (request.body.name.trim() === '') {
+//         return response.status(400).json({ name: 'Must not be empty' })
+//     }
 
-    const newHost = {
-        name: request.body.name,
-        time: new Date()
-    }
+//     const newHost = {
+//         name: request.body.name,
+//         time: new Date()
+//     }
 
-    db
-        .collection('sirius-retro-hosts')
-        .add(newHost)
-        .then((doc) => {
-            const responseNewHost = newHost;
-            responseNewHost.id = doc.id;
-            return response.json(responseNewHost);
-        })
-        .catch((err) => {
-            response.status(500).json({ error: err });
-            console.error(err);
-        });
-}
+//     db
+//         .collection('sirius-retro-hosts')
+//         .add(newHost)
+//         .then((doc) => {
+//             const responseNewHost = newHost;
+//             responseNewHost.id = doc.id;
+//             return response.json(responseNewHost);
+//         })
+//         .catch((err) => {
+//             response.status(500).json({ error: err });
+//             console.error(err);
+//         });
+// }
 
-exports.addPlanHost = (request, response) => {
-    if (request.body.name.trim() === '') {
-        return response.status(400).json({ name: 'Must not be empty' })
-    }
+// exports.addPlanHost = (request, response) => {
+//     if (request.body.name.trim() === '') {
+//         return response.status(400).json({ name: 'Must not be empty' })
+//     }
 
-    const newHost = {
-        name: request.body.name,
-        time: new Date()
-    }
+//     const newHost = {
+//         name: request.body.name,
+//         time: new Date()
+//     }
 
-    db
-        .collection('sirius-plan-hosts')
-        .add(newHost)
-        .then((doc) => {
-            const responseNewHost = newHost;
-            responseNewHost.id = doc.id;
-            return response.json(responseNewHost);
-        })
-        .catch((err) => {
-            response.status(500).json({ error: err });
-            console.error(err);
-        });
-}
+//     db
+//         .collection('sirius-plan-hosts')
+//         .add(newHost)
+//         .then((doc) => {
+//             const responseNewHost = newHost;
+//             responseNewHost.id = doc.id;
+//             return response.json(responseNewHost);
+//         })
+//         .catch((err) => {
+//             response.status(500).json({ error: err });
+//             console.error(err);
+//         });
+// }
 
 exports.updateCan = (request, response) => {
     if (request.body.name.trim() === '') {

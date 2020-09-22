@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './default.scss';
+import './app.scss';
 import axios from 'axios';
 import LeftBox from './LeftBox/ElementList';
 import MidBox from './MidBox/Pie';
@@ -54,13 +54,6 @@ class App extends Component {
         const spriintPlanList = res.data;
         this.setState({ spriintPlanList })
       })
-
-
-    // this.setState({
-    //   originPieList:this.standupList
-    // })
-
-    // console.log(this.pieList)
   }
 
   determinePieList = (mode) => {
@@ -71,7 +64,6 @@ class App extends Component {
           pieList: [...this.state.standupList],
           originPieList: [...this.state.standupList]
         });
-        console.log(this.state.pieList)
         break;
       case 'retro':
         this.setState({
@@ -107,20 +99,8 @@ class App extends Component {
       console.log(this.state.allList);
       let newCan = this.state.allList.find(ele => ele.name === name);
       newCan.mode = mode;
-      // newCan.forEach(ele=>ele.mode=mode)
       updatedPieList = [...pieList, newCan]
     }
-
-
-    // const updatedPieList = pieList.some(ele => ele.name === name) ? (
-    //   pieList.length >= 4 ? (pieList.filter(ele => {
-    //     return ele.name !== name
-    //   })) : (
-    //       pieList
-    //     )
-    // ) : (
-    //   [...pieList, this.state.allList.find(ele => ele.name === name)]
-    //   )
     this.setState({
       pieList: updatedPieList
     })
@@ -151,32 +131,26 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <div className="row">
-          <div className="col-sm">
-            <LeftBox
-              mode={this.state.mode}
-              allList={this.state.allList}
-              pieList={this.state.pieList}
-              reSetElementList={this.reSetElementList}
-              addElement={this.addElement}
-              shuffleWheel={this.shuffleWheel}
-            />
-          </div>
-          <div className="col-sm">
-            <MidBox
-              pieList={this.state.pieList}
-              originPieList={this.state.originPieList}
-              colorsList={this.state.colorsList}
-              resetCan={this.resetCan}
-              mode={this.state.mode}
-            />
-          </div>
-          <div className="col-sm">
-            <RightBox determinePieList={this.determinePieList} />
-          </div>
-        </div>
+      <div className="app">
+        <LeftBox
+          mode={this.state.mode}
+          allList={this.state.allList}
+          pieList={this.state.pieList}
+          reSetElementList={this.reSetElementList}
+          addElement={this.addElement}
+          shuffleWheel={this.shuffleWheel}
+        />
+        <MidBox
+          pieList={this.state.pieList}
+          originPieList={this.state.originPieList}
+          colorsList={this.state.colorsList}
+          resetCan={this.resetCan}
+          mode={this.state.mode}
+        />
+        <RightBox determinePieList={this.determinePieList} />
       </div>
+
+
     );
   }
 

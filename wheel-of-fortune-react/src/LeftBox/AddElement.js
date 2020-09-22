@@ -1,43 +1,45 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import FormInput from '../components/FormInput/formInput'
 
 class AddElement extends Component {
     state = {
         name: ''
     }
-//for git test
+    //for git test
     handleSubmit = (e) => {
         e.preventDefault();
         const newCandidate = {
             name: this.state.name
         }
+        this.props.addElement(newCandidate);
         if (this.state.name !== '') {
-            this.props.addElement(newCandidate);
-        }
-        axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/new', newCandidate)
-            .then(res => {
-                console.log(res);
-                console.log(res.data)
+            axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/new', newCandidate)
+                .then(res => {
+                    console.log(res);
+                    console.log(res.data())
+                })
+            this.setState({
+                name: ''
             })
+        }
 
-        this.setState({
-            name: ''
-        })
     }
 
     handleChange = (e) => {
         this.setState({
             name: e.target.value
         })
-        // console.log(this.state)
     }
 
     render() {
         return (
             <div className="addElementForm">
                 <form onSubmit={this.handleSubmit}>
-                    <input type="text" onChange={this.handleChange} value={this.state.name}></input>
-                    <button className="addBtn">Add New Candidate</button>
+                    <FormInput 
+                    handleChange={this.handleChange} 
+                    value={this.state.name} 
+                    label="Add new candidate"/>
                 </form>
             </div>
         )
