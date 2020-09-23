@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
+import './rightBox.scss';
 import CustomButton from '../components/CustomButton/customButton';
-import './rightBox.scss'
+import ToggleTips from '../components/ToggleTips/toggleTips';
 
 class RightBox extends Component {
-
-    state = {
-        standupBtn: true,
-        retroBtn: false,
-        sprintPlanBtn: false
+    constructor() {
+        super();
+        this.state = {
+            standupBtn: true,
+            retroBtn: false,
+            sprintPlanBtn: false,
+            tip: false
+        }
     }
-
 
     handleClick = (e) => {
         console.log(e.target.value)
@@ -38,6 +41,10 @@ class RightBox extends Component {
                     sprintPlanBtn: true
                 });
                 break;
+            case "tips":
+                this.setState({
+                    tip: true
+                })
             default:
                 console.log('cannot get the mode for button')
         }
@@ -64,6 +71,8 @@ class RightBox extends Component {
                         handleClick={this.handleClick}
                         name="Sprint Planning" />
                 </div>
+
+                <ToggleTips title="Click to check the update!!" />
 
             </div>
         )

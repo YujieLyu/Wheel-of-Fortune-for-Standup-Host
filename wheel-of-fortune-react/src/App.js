@@ -82,45 +82,14 @@ class App extends Component {
     }
   }
 
-  reSetElementList = (name, mode) => {
 
-    const pieList = [...this.state.pieList];
-    let updatedPieList;
-
-    if (pieList.some(ele => ele.name === name)) {
-      if (pieList.length >= 4) {
-        updatedPieList = pieList.filter(ele => {
-          return ele.name !== name
-        })
-      } else {
-        updatedPieList = pieList
-      }
-    } else {
-      console.log(this.state.allList);
-      let newCan = this.state.allList.find(ele => ele.name === name);
-      newCan.mode = mode;
-      updatedPieList = [...pieList, newCan]
-    }
-    this.setState({
-      pieList: updatedPieList
-    })
-
-  }
 
   resetCan = () => {
     this.state.allList.map(ele => axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/update-can', ele))
   }
 
 
-  addElement = (newEle) => {
-    newEle.id = this.state.allList.length;
-    let updatedPieList = [...this.state.pieList, newEle];
-    let updatedAllList = [...this.state.allList, newEle];
-    this.setState({
-      pieList: updatedPieList,
-      allList: updatedAllList
-    })
-  }
+
 
   shuffleWheel = () => {
     let updatedList = [...this.state.pieList];
@@ -136,9 +105,9 @@ class App extends Component {
           mode={this.state.mode}
           allList={this.state.allList}
           pieList={this.state.pieList}
-          reSetElementList={this.reSetElementList}
-          addElement={this.addElement}
-          shuffleWheel={this.shuffleWheel}
+          // reSetElementList={this.reSetElementList}
+          // addElement={this.addElement}
+          // shuffleWheel={this.shuffleWheel}
         />
         <MidBox
           pieList={this.state.pieList}
@@ -146,6 +115,7 @@ class App extends Component {
           colorsList={this.state.colorsList}
           resetCan={this.resetCan}
           mode={this.state.mode}
+          shuffleWheel={this.shuffleWheel}
         />
         <RightBox determinePieList={this.determinePieList} />
       </div>

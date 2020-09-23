@@ -1,49 +1,16 @@
 .LeftBox {
-    // position: absolute;
-    width: 20rem;
-    display: inline-block;
-    height: 40rem;
-    left: 100px;
-    margin: 10% 5%;
-    font-family: monospace;
-    font-size: 16px;
-    input[type="checkbox"] {
-        width: 18px;
-        height: 18px;
-        margin-right: 8px;
-        cursor: pointer;
-    }
+  width: 30rem;
+  display: inline-block;
+  height: 40rem;
+  margin: 10rem 10rem;
+  font-family: monospace;
+  font-size: 16px;
 
-    .addElementForm{
-        margin-top: 20px;
-        font-size: small;
-  
-    }
+  h1 {
+    margin-bottom: 20px;
+  }
 
-    p {
-        font-size: small;
-        margin-bottom: 10px;
-    }
-
-   
-    .shuffleButton {
-        background-color: white;
-        color: #60c8f8;
-        border: 2px solid #60c8f8;
-        padding: 8px 20px;
-        text-align: center;
-        display: inline-block;
-        font-size: 16px;
-        font-family: monospace;
-        margin: 25px 2px;
-        transition-duration: 0.4s;
-        cursor: pointer;
-        &:hover {
-            background-color: #60c8f8;
-            color: white;
-        }
-        &:focus {
-            outline: 0 !important;
-        }
-    }
+  p {
+    margin: 15px 0;
+  }
 }
