@@ -16,12 +16,12 @@ class AddElement extends Component {
         const newCandidate = {
             name: this.state.name
         }
-        this.props.addElement(newCandidate);
+        console.log(this.props.allList);
+        this.addElement(newCandidate);
         if (this.state.name !== '') {
             axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/new', newCandidate)
                 .then(res => {
                     console.log(res);
-                    console.log(res.data())
                 })
             this.setState({
                 name: ''
@@ -36,6 +36,42 @@ class AddElement extends Component {
         })
     }
 
+    addElement = (newEle) => {
+
+        let updatedPieList = [...this.props.pieList, newEle];
+        let updatedAllList = [...this.props.allList, newEle];
+        newEle.id = updatedAllList.length - 1;
+        this.setState({
+            pieList: updatedPieList,
+            allList: updatedAllList
+        })
+    }
+
+    reSetElementList = (name, mode) => {
+
+        const pieList = [...this.props.pieList];
+        let updatedPieList;
+
+        if (pieList.some(ele => ele.name === name)) {
+            if (pieList.length >= 4) {
+                updatedPieList = pieList.filter(ele => {
+                    return ele.name !== name
+                })
+            } else {
+                updatedPieList = pieList
+            }
+        } else {
+            console.log(this.props.allList);
+            let newCan = this.props.allList.find(ele => ele.name === name);
+            newCan.mode = mode;
+            updatedPieList = [...pieList, newCan]
+        }
+        this.setState({
+            pieList: updatedPieList
+        })
+
+    }
+
     render() {
         return (
             <div className="addElementForm">
@@ -43,7 +79,7 @@ class AddElement extends Component {
                     <FormInput
                         handleChange={this.handleChange}
                         value={this.state.name}
-                        label="Add new candidate" />
+                        label="New candidate" />
                 </form>
             </div>
         )

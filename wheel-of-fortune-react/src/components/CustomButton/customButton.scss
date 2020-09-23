@@ -1,6 +1,5 @@
 button {
   background-color: white;
-  padding: 8px 20px;
   text-align: center;
   display: block;
   font-size: 20px;
@@ -13,6 +12,7 @@ button {
 }
 .standup {
   width: 250px;
+  padding: 8px 20px;
   color: #6f71f8;
   border: 2px solid #6f71f8;
   &:hover {
@@ -26,6 +26,7 @@ button {
 }
 .retro {
   width: 250px;
+  padding: 8px 20px;
   color: #f51d9b;
   border: 2px solid #f51d9b;
   &:hover {
@@ -39,6 +40,7 @@ button {
 }
 .sprint-planning {
   width: 250px;
+  padding: 8px 20px;
   color: #fac248;
   border: 2px solid #fac248;
   &:hover {
@@ -52,6 +54,8 @@ button {
 }
 
 .origin {
+  width: 50px;
+  font-size: 14px;
   color: black;
   border: 2px solid black;
   &:hover {
@@ -62,10 +66,11 @@ button {
 
 .shuffleBtn{
   margin: 4rem auto;
-  color:  #ff5722;
-  border: 2px solid #ff5722;
+  padding: 8px 20px;
+  color:  #ff6565;
+  border: 2px solid  #ff6565;
   &:hover {
-    background-color:  #ff5722;
+    background-color:   #ff6565;
     color: white;
   }
 }

@@ -2,7 +2,6 @@ import React from 'react';
 import './styles.scss';
 
 const Slice = ({ sliceAngle, index, skewValue, colorListEle, pieListEle }) => {
-    console.log(colorListEle)
     return (
         <li className="slice" style={{
             transform: 'rotate(' + sliceAngle * index + 'deg) skewY(' + skewValue + 'deg)',

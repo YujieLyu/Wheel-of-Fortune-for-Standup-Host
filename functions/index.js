@@ -40,38 +40,9 @@ const { addStandupHost } = require('./APIs/candidates');
 
 app.post('/add-standup-host', addStandupHost);
 
-const { addRetroHost } = require('./APIs/candidates');
-
-app.post('/add-retro-host', addRetroHost);
-
-const { addPlanHost } = require('./APIs/candidates');
-
-app.post('/add-plan-host', addPlanHost);
-
 const { updateCan } = require('./APIs/candidates');
 
 app.post('/update-can', updateCan);
-
-// const { deleteCan } = require('./APIs/candidates');
-
-// app.delete('/delete', deleteCan);
-
-const { deleteTest } = require('./APIs/candidates');
-
-app.delete('/delete-test', deleteTest);
-
-const { deleteStandupCan } = require('./APIs/candidates');
-
-app.delete('/delete-standup', deleteStandupCan);
-
-const { deleteRetroCan } = require('./APIs/candidates');
-
-app.delete('/delete-retro', deleteRetroCan);
-
-const { deleteSprintPlanCan } = require('./APIs/candidates');
-
-app.delete('/delete-sprintplan', deleteSprintPlanCan);
-
 
 const { getColors } = require('./APIs/colors');
 

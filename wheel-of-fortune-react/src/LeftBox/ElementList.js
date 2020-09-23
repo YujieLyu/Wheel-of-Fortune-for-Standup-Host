@@ -22,7 +22,9 @@ class ElementList extends Component {
                     allList={this.props.allList}
                     pieList={this.props.pieList}
                     handleChange={this.handleChange} />
-                <AddElement addElement={this.props.addElement} />
+                <AddElement 
+                allList={this.props.allList}
+                pieList={this.props.pieList}Î/>
             </div>
         )
     }
