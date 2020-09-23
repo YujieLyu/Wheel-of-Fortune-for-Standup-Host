@@ -2,15 +2,20 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import './pie.scss';
 import Slice from '../components/Slice/Slice';
+import CustomButton from '../components/CustomButton/customButton';
 
 class Pie extends Component {
-    state = {
-        degree: null,
-        host: null
+    constructor() {
+        super();
+        this.state = {
+            degree: null,
+            host: null
+        }
     }
 
     createPie() {
         let pieList = [...this.props.pieList]
+        console.log(pieList)
         let colorsList = [...this.props.colorsList]
         let sliceAngle, skewValue;
         sliceAngle = 360 / pieList.length;
@@ -24,9 +29,7 @@ class Pie extends Component {
                         index={i}
                         skewValue={skewValue}
                         pieListEle={ele}
-                        colorListEle={colorsList[i]}
-                    />
-
+                        colorListEle={colorsList[i]} />
                 )
             )) : (<div>
                 Loading...
@@ -41,7 +44,6 @@ class Pie extends Component {
         const newHost = {
             name: hostName
         }
-        console.log('new host is ',newHost)
         switch (this.props.pieList[host].mode) {
             case "standup":
                 axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/add-standup-host', newHost)
@@ -68,7 +70,7 @@ class Pie extends Component {
 
         alert(`Congrats, ${hostName} ! You will run the next stand-up`)
     }
-Ï
+
     handleClick = () => {
         let x = 1024;
         let y = 60204;
@@ -78,43 +80,42 @@ class Pie extends Component {
         })
         setTimeout(() => this.alertHost(deg), 5500);
 
-
         const pieList = this.props.pieList;
         const originPieList = this.props.originPieList;
 
-        switch (pieList[0].mode) {
-            case "standup":
-                originPieList.forEach(ele =>
-                    axios.delete('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/delete-standup',
-                        { data: ele })
-                        .then((res) => console.log(res))
-                        .catch(err => console.log(err))
-                );
-                pieList.forEach(ele => axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/update-can', ele)
-                    .catch(err => console.log(err))
-                )
-                break;
-            case "retro":
-                originPieList.forEach(ele =>
-                    // console.log(ele)
-                    axios.delete('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/delete-retro', { data: ele })
-                        .then((res) => console.log(res))
-                        .catch(err => console.log(err))
-                );
-                pieList.forEach(ele => axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/update-can', ele))
-                break;
-            case "plan":
-                originPieList.forEach(ele =>
-                    // console.log(ele)
-                    axios.delete('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/delete-sprintplan', { data: ele })
-                        .then((res) => console.log(res))
-                        .catch(err => console.log(err))
-                );
-                pieList.forEach(ele => axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/update-can', ele))
-                break;
-            default:
-                console.log('cannot get the mode for pie');
-        }
+        // switch (pieList[0].mode) {
+        //     case "standup":
+        //         originPieList.forEach(ele =>
+        //             axios.delete('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/delete-standup',
+        //                 { data: ele })
+        //                 .then((res) => console.log(res))
+        //                 .catch(err => console.log(err))
+        //         );
+        //         pieList.forEach(ele => axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/update-can', ele)
+        //             .catch(err => console.log(err))
+        //         )
+        //         break;
+        //     case "retro":
+        //         originPieList.forEach(ele =>
+        //             // console.log(ele)
+        //             axios.delete('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/delete-retro', { data: ele })
+        //                 .then((res) => console.log(res))
+        //                 .catch(err => console.log(err))
+        //         );
+        //         pieList.forEach(ele => axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/update-can', ele))
+        //         break;
+        //     case "plan":
+        //         originPieList.forEach(ele =>
+        //             // console.log(ele)
+        //             axios.delete('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/delete-sprintplan', { data: ele })
+        //                 .then((res) => console.log(res))
+        //                 .catch(err => console.log(err))
+        //         );
+        //         pieList.forEach(ele => axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/update-can', ele))
+        //         break;
+        //     default:
+        //         console.log('cannot get the mode for pie');
+        // }
 
 
         // if (pieList >= 4) {
@@ -127,15 +128,22 @@ class Pie extends Component {
         // console.log(this.props.originPieList);
     }
 
-
-
     render() {
         return (
             <div className="MidBox" >
-                <ul className="pie" id="pie" style={{ transform: 'rotate(' + this.state.degree + 'deg)' }}>
+                <ul
+                    className="pie"
+                    id="pie"
+                    style={{ transform: 'rotate(' + this.state.degree + 'deg)' }}>
                     {this.createPie()}
                 </ul>
                 <button className="spin" onClick={this.handleClick}>GO</button>
+
+                <CustomButton
+                    value="shuffleBtn"
+                    name="Shuffle the wheel"
+                    handleClick={this.props.shuffleWheel}
+                />
             </div>
         )
     }

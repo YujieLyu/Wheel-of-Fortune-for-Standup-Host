@@ -3,13 +3,14 @@ import CustomButton from '../components/CustomButton/customButton';
 import './rightBox.scss'
 
 class RightBox extends Component {
-
-    state = {
-        standupBtn: true,
-        retroBtn: false,
-        sprintPlanBtn: false
+    constructor() {
+        super();
+        this.state = {
+            standupBtn: true,
+            retroBtn: false,
+            sprintPlanBtn: false
+        }
     }
-
 
     handleClick = (e) => {
         console.log(e.target.value)

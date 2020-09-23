@@ -3,10 +3,14 @@ import axios from 'axios';
 import FormInput from '../components/FormInput/formInput'
 
 class AddElement extends Component {
-    state = {
-        name: ''
+
+    constructor() {
+        super();
+        this.state = {
+            name: ''
+        }
     }
-    //for git test
+
     handleSubmit = (e) => {
         e.preventDefault();
         const newCandidate = {
@@ -36,10 +40,10 @@ class AddElement extends Component {
         return (
             <div className="addElementForm">
                 <form onSubmit={this.handleSubmit}>
-                    <FormInput 
-                    handleChange={this.handleChange} 
-                    value={this.state.name} 
-                    label="Add new candidate"/>
+                    <FormInput
+                        handleChange={this.handleChange}
+                        value={this.state.name}
+                        label="Add new candidate" />
                 </form>
             </div>
         )

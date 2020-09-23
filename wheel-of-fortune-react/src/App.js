@@ -138,7 +138,7 @@ class App extends Component {
           pieList={this.state.pieList}
           reSetElementList={this.reSetElementList}
           addElement={this.addElement}
-          shuffleWheel={this.shuffleWheel}
+          // shuffleWheel={this.shuffleWheel}
         />
         <MidBox
           pieList={this.state.pieList}
@@ -146,6 +146,7 @@ class App extends Component {
           colorsList={this.state.colorsList}
           resetCan={this.resetCan}
           mode={this.state.mode}
+          shuffleWheel={this.shuffleWheel}
         />
         <RightBox determinePieList={this.determinePieList} />
       </div>

@@ -1,0 +1,15 @@
+.candidate-list {
+  display: flex;
+  align-items: center;
+  
+  input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin: 8px;
+    cursor: pointer;
+  }
+
+  label {
+    font-size: 18px;
+  }
+}

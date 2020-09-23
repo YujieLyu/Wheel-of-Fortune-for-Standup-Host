@@ -52,11 +52,20 @@ button {
 }
 
 .origin {
-  color: rgb(204, 109, 109);
-  border: 2px solid rgb(204, 109, 109);
+  color: black;
+  border: 2px solid black;
   &:hover {
-    background-color:rgb(204, 109, 109);
+    background-color: black;
     color: white;
   }
+}
 
+.shuffleBtn{
+  margin: 4rem auto;
+  color:  #ff5722;
+  border: 2px solid #ff5722;
+  &:hover {
+    background-color:  #ff5722;
+    color: white;
+  }
 }
