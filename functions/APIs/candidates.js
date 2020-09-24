@@ -1,5 +1,5 @@
 const { db } = require('../utils/admin');
-const { response } = require('express');
+const { response, request } = require('express');
 
 exports.getAll = (request, response) => {
 
@@ -13,7 +13,7 @@ exports.getAll = (request, response) => {
                 allCandidates.push({
                     id: ele.id,
                     name: ele.data().name,
-                    mode:ele.data().mode
+                    mode: ele.data().mode
                 });
             });
             return response.json(allCandidates);
@@ -94,51 +94,39 @@ exports.getSprintPlanCan = (request, response) => {
 }
 
 exports.addNew = (request, response) => {
-    if (request.body.name.trim() === '') {
-        return response.status(400).json({ name: 'Must not be empty' })
-    }
 
-    const newCandidate = {
-        name: request.body.name,
-        mode:'all'
-    }
+    add(request, response, 'sirius-all', 'all');
+}
 
-    db
-        .collection('sirius-all')
-        .add(newCandidate)
-        .then((doc) => {
-            const responseNewCandidate = newCandidate;
-            responseNewCandidate.id = doc.id;
-            return response.json(responseNewCandidate);
-        })
-        .catch((err) => {
-            response.status(500).json({ error: err });
-            console.error(err);
-        });    
+exports.addNewStandupCan = (request, response) => {
+
+    add(request, response, 'sirius-standup', 'standup');
+
 }
 
 exports.addStandupHost = (request, response) => {
-    if (request.body.name.trim() === '') {
-        return response.status(400).json({ name: 'Must not be empty' })
-    }
+    // if (request.body.name.trim() === '') {
+    //     return response.status(400).json({ name: 'Must not be empty' })
+    // }
 
-    const newHost = {
-        name: request.body.name,
-        time: new Date()
-    }
+    // const newHost = {
+    //     name: request.body.name,
+    //     time: new Date()
+    // }
+    add(request, response, 'sirius-standup-hosts', 'standup-host');
 
-    db
-        .collection('sirius-standup-hosts')
-        .add(newHost)
-        .then((doc) => {
-            const responseNewHost = newHost;
-            responseNewHost.id = doc.id;
-            return response.json(responseNewHost);
-        })
-        .catch((err) => {
-            response.status(500).json({ error: err });
-            console.error(err);
-        });
+    // db
+    //     .collection('sirius-standup-hosts')
+    //     .add(newHost)
+    //     .then((doc) => {
+    //         const responseNewHost = newHost;
+    //         responseNewHost.id = doc.id;
+    //         return response.json(responseNewHost);
+    //     })
+    //     .catch((err) => {
+    //         response.status(500).json({ error: err });
+    //         console.error(err);
+    //     });
 }
 
 exports.updateCan = (request, response) => {
@@ -194,9 +182,50 @@ exports.updateCan = (request, response) => {
                     console.error(err);
                 });
             break;
-            default:
-                response.json({message:'cannot get the mode'})
+        default:
+            response.json({ message: 'cannot get the mode' })
     }
 
 }
 
+exports.deleteStandupCan = (request, response) => {
+    const document = db.doc(`/sirius-standup/${request.params.id}`);
+    document
+        .get()
+        .then(doc => {
+            if (!doc.exists) {
+                return response.status(404).json({ error: 'candidate not found' })
+            }
+            document.delete();
+        })
+        .then(() => {
+            response.json({ message: 'Delete successfully' })
+        })
+        .catch(err => {
+            console.log(err);
+            return response.status(500).json({ err: err.code });
+        })
+}
+
+const add = (request, response, collection, mode) => {
+    if (request.body.name.trim() === '') {
+        return response.status(400).json({ name: 'Must not be empty' })
+    }
+    const newCandidate = {
+        name: request.body.name,
+        mode: mode,
+        time: new Date()
+    }
+    db
+        .collection(collection)
+        .add(newCandidate)
+        .then((doc) => {
+            const responseNewCandidate = newCandidate;
+            responseNewCandidate.id = doc.id;
+            return response.json(responseNewCandidate);
+        })
+        .catch((err) => {
+            response.status(500).json({ error: err });
+            console.error(err);
+        });
+}

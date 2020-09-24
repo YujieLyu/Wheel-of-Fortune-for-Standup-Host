@@ -13,6 +13,8 @@ class App extends Component {
     allList: [],
     pieList: [],
     originPieList: [],
+    deleted:[],
+    added:[],
     standupList: [],
     retroList: [],
     spriintPlanList: [],
@@ -62,19 +64,22 @@ class App extends Component {
       case 'standup':
         this.setState({
           pieList: [...this.state.standupList],
-          originPieList: [...this.state.standupList]
+          removed:[],
+          added:[]
         });
         break;
       case 'retro':
         this.setState({
           pieList: [...this.state.retroList],
-          originPieList: [...this.state.retroList]
+          removed:[],
+          added:[]
         });
         break;
       case 'sprint-planning':
         this.setState({
           pieList: [...this.state.spriintPlanList],
-          originPieList: [...this.state.spriintPlanList]
+          removed:[],
+          added:[]
         });
         break;
       default:
@@ -89,7 +94,34 @@ class App extends Component {
   }
 
 
+  reSetElementList = (name, mode) => {
 
+    const pieList = [...this.state.pieList];
+    let updatedPieList;
+    
+    const canToDelete=pieList.find(ele=>ele.name===name)
+    if(canToDelete){
+      if (pieList.length >= 4) {
+        updatedPieList = pieList.filter(element => {
+          return element.name !== name
+        });
+        this.state.deleted.push(canToDelete);
+        // axios.delete(`https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/sirius-standup/${canToDelete.id}`)
+      } else {
+        updatedPieList = pieList
+      }
+    }else {
+      console.log(this.state.allList);
+      let newCan = this.state.allList.find(ele => ele.name === name);
+      this.state.added.push(newCan);
+      // axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/newStandupCan',newCan)
+      newCan.mode = mode;
+      updatedPieList = [...pieList, newCan]
+    }
+    this.setState({
+      pieList: updatedPieList
+    })
+  }
 
   shuffleWheel = () => {
     let updatedList = [...this.state.pieList];
@@ -105,14 +137,13 @@ class App extends Component {
           mode={this.state.mode}
           allList={this.state.allList}
           pieList={this.state.pieList}
-          // reSetElementList={this.reSetElementList}
-          // addElement={this.addElement}
-          // shuffleWheel={this.shuffleWheel}
+          reSetElementList={this.reSetElementList}
         />
         <MidBox
           pieList={this.state.pieList}
-          originPieList={this.state.originPieList}
           colorsList={this.state.colorsList}
+          added={this.state.added}
+          deleted={this.state.deleted}
           resetCan={this.resetCan}
           mode={this.state.mode}
           shuffleWheel={this.shuffleWheel}

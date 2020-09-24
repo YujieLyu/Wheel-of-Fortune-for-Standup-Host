@@ -50,7 +50,6 @@ class RightBox extends Component {
         }
     }
 
-
     render() {
         return (
             <div className="RightBox">

@@ -36,6 +36,10 @@ const { addNew } = require('./APIs/candidates');
 
 app.post('/new', addNew);
 
+const { addNewStandupCan } = require('./APIs/candidates');
+
+app.post('/newStandupCan', addNewStandupCan);
+
 const { addStandupHost } = require('./APIs/candidates');
 
 app.post('/add-standup-host', addStandupHost);
@@ -43,6 +47,10 @@ app.post('/add-standup-host', addStandupHost);
 const { updateCan } = require('./APIs/candidates');
 
 app.post('/update-can', updateCan);
+
+const {deleteStandupCan}=require('./APIs/candidates');
+
+app.delete('/sirius-standup/:id',deleteStandupCan)
 
 const { getColors } = require('./APIs/colors');
 
