@@ -8,8 +8,7 @@ class Pie extends Component {
     constructor() {
         super();
         this.state = {
-            degree: null,
-            host: null
+            degree: null
         }
     }
 
@@ -39,12 +38,11 @@ class Pie extends Component {
         let dist = 360 - (deg % 360);
         let host = Math.floor(dist * this.props.pieList.length / 360);
         let hostName = this.props.pieList[host].name;
-        this.setState({ host });
         const newHost = {
             name: hostName
         }
-        console.log(this.props.pieList[host])
-        switch (this.props.pieList[host].mode) {
+       console.log(this.props.mode)
+        switch (this.props.mode.toLowerCase()) {
             case "standup":
                 axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/add-standup-host', newHost)
                     .then(res => {

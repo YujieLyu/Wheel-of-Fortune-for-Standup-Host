@@ -13,7 +13,6 @@ class App extends Component {
       mode: 'Standup',
       allList: [],
       pieList: [],
-      originPieList: [],
       deleted: [],
       added: [],
       standupList: [],
@@ -24,19 +23,33 @@ class App extends Component {
 
   }
 
-  componentDidMount() {
+  componentDidUpdate(prevProps) {
+    if (prevProps.pieList !== this.props.pieList || prevProps.allList !== this.props.allList) {
+      this.getAllList();
+      this.getColorList();
+      this.getStandupList();
+      this.getRetroList();
+      this.getSpriintPlanList();
+    }
+  }
+
+  getAllList = () => {
     axios.get('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/all')
       .then(res => {
         const allList = res.data;
         this.setState({ allList });
       });
+  }
 
+  getColorList = () => {
     axios.get('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/colors')
       .then(res => {
         const colorsList = res.data;
         this.setState({ colorsList })
       })
+  }
 
+  getStandupList = () => {
     axios.get('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/standup')
       .then(res => {
         const standupList = res.data;
@@ -44,21 +57,32 @@ class App extends Component {
         this.setState({
           standupList,
           pieList: standupList,
-          originPieList: standupList
         });
       })
+  }
 
+  getRetroList = () => {
     axios.get('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/retro')
       .then(res => {
         const retroList = res.data;
         this.setState({ retroList })
       })
+  }
 
+  getSpriintPlanList() {
     axios.get('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/sprint-plan')
       .then(res => {
         const spriintPlanList = res.data;
         this.setState({ spriintPlanList })
       })
+  }
+
+  componentDidMount() {
+    this.getAllList();
+    this.getColorList();
+    this.getStandupList();
+    this.getRetroList();
+    this.getSpriintPlanList();
   }
 
   determinePieList = (mode) => {
@@ -117,6 +141,27 @@ class App extends Component {
     })
   }
 
+
+  deleteCan = (eleInAll, eleInPie) => {
+    if (eleInAll) {
+      const updatedAllList = this.state.allList.filter(e => e.id !== eleInAll.id);
+      this.setState({ allList: updatedAllList })
+      axios.delete(`https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/sirius-all/${eleInAll.id}`)
+    }
+    if (eleInPie) {
+      const updatedPieList = this.state.pieList.filter(e => e.id !== eleInPie.id);
+      this.setState({ pieList: updatedPieList })
+      axios.delete(`https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/sirius-standup/${eleInPie.id}`)
+    }
+  }
+
+  addCan = (newCan) => {
+    const updatedAllList = [...this.state.allList, newCan]
+    this.setState({
+      allList: updatedAllList
+    })
+  }
+
   shuffleWheel = () => {
     let updatedList = [...this.state.pieList];
     this.setState({
@@ -132,6 +177,8 @@ class App extends Component {
           allList={this.state.allList}
           pieList={this.state.pieList}
           reSetElementList={this.reSetElementList}
+          deleteCan={this.deleteCan}
+          addCan={this.addCan}
         />
         <MidBox
           pieList={this.state.pieList}

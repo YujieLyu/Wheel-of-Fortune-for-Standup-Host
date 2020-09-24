@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './leftBox.scss';
-import axios from 'axios'
+
 
 import AddElement from './AddElement';
 
@@ -17,13 +17,8 @@ class ElementList extends Component {
     handleChange = (ele) => {
         this.props.reSetElementList(ele.name)
     }
-    handleClick=(eleInAll,eleInPie)=>{
-        if(eleInAll){
-            axios.delete(`https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/sirius-all/${eleInAll.id}`)
-        }
-        if(eleInPie){
-            axios.delete(`https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/sirius-standup/${eleInAll.id}`)
-        }
+    handleClick = (eleInAll, eleInPie) => {
+        this.props.deleteCan(eleInAll, eleInPie)
     }
     render() {
         return (
@@ -37,10 +32,12 @@ class ElementList extends Component {
                     allList={this.props.allList}
                     pieList={this.props.pieList}
                     handleChange={this.handleChange}
-                    handleClick={this.handleClick} 
-                    />
-                <AddElement allList={this.props.allList}
-                    pieList={this.props.pieList} />
+                    handleClick={this.handleClick}
+                />
+                <AddElement
+                    allList={this.props.allList}
+                    pieList={this.props.pieList}
+                    addCan={this.props.addCan} />
             </div>
         )
     }

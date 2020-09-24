@@ -72,7 +72,7 @@ class RightBox extends Component {
                         name="Sprint Planning" />
                 </div>
 
-                <ToggleTips title="Click to check the update!!" />
+                <ToggleTips title="Click to check the update" />
 
             </div>
         )

@@ -16,6 +16,7 @@ class AddElement extends Component {
         const newCandidate = {
             name: this.state.name
         }
+        this.props.addCan(newCandidate);
         console.log(this.props.allList);
         this.addElement(newCandidate);
         if (this.state.name !== '') {
