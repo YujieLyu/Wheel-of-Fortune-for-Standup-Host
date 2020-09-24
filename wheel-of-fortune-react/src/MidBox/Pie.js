@@ -43,13 +43,14 @@ class Pie extends Component {
         const newHost = {
             name: hostName
         }
+        console.log(this.props.pieList[host])
         switch (this.props.pieList[host].mode) {
             case "standup":
-                // axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/add-standup-host', newHost)
-                //     .then(res => {
-                //         console.log(res);
-                //         console.log(res.data)
-                //     });
+                axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/add-standup-host', newHost)
+                    .then(res => {
+                        console.log(res);
+                        console.log(res.data)
+                    });
                 setTimeout(() => this.props.deleted.forEach(e =>
                     axios.delete(`https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/sirius-standup/${e.id}`)
                 ), 6000)
@@ -69,6 +70,8 @@ class Pie extends Component {
                         console.log(res.data)
                     });
                 break;
+            default:
+                console.log('failed to catch mode after alert host')
         }
 
         alert(`Congrats, ${hostName} ! You will run the next stand-up`)
@@ -82,9 +85,6 @@ class Pie extends Component {
             degree: deg
         })
         setTimeout(() => this.alertHost(deg), 5500);
-
-        const pieList = this.props.pieList;
-        const originPieList = this.props.originPieList;
 
 
         this.props.added.forEach(e =>

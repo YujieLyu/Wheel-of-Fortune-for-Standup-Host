@@ -44,7 +44,8 @@ class RightBox extends Component {
             case "tips":
                 this.setState({
                     tip: true
-                })
+                });
+                break;
             default:
                 console.log('cannot get the mode for button')
         }

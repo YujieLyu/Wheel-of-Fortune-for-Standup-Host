@@ -7,18 +7,21 @@ import RightBox from './RightBox/RightBox';
 
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      mode: 'Standup',
+      allList: [],
+      pieList: [],
+      originPieList: [],
+      deleted: [],
+      added: [],
+      standupList: [],
+      retroList: [],
+      spriintPlanList: [],
+      colorsList: []
+    }
 
-  state = {
-    mode: 'Standup',
-    allList: [],
-    pieList: [],
-    originPieList: [],
-    deleted:[],
-    added:[],
-    standupList: [],
-    retroList: [],
-    spriintPlanList: [],
-    colorsList: []
   }
 
   componentDidMount() {
@@ -64,22 +67,22 @@ class App extends Component {
       case 'standup':
         this.setState({
           pieList: [...this.state.standupList],
-          removed:[],
-          added:[]
+          removed: [],
+          added: []
         });
         break;
       case 'retro':
         this.setState({
           pieList: [...this.state.retroList],
-          removed:[],
-          added:[]
+          removed: [],
+          added: []
         });
         break;
       case 'sprint-planning':
         this.setState({
           pieList: [...this.state.spriintPlanList],
-          removed:[],
-          added:[]
+          removed: [],
+          added: []
         });
         break;
       default:
@@ -88,33 +91,24 @@ class App extends Component {
   }
 
 
-
-  resetCan = () => {
-    this.state.allList.map(ele => axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/update-can', ele))
-  }
-
-
   reSetElementList = (name, mode) => {
 
     const pieList = [...this.state.pieList];
     let updatedPieList;
-    
-    const canToDelete=pieList.find(ele=>ele.name===name)
-    if(canToDelete){
+
+    const canToDelete = pieList.find(ele => ele.name === name)
+    if (canToDelete) {
       if (pieList.length >= 4) {
         updatedPieList = pieList.filter(element => {
           return element.name !== name
         });
         this.state.deleted.push(canToDelete);
-        // axios.delete(`https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/sirius-standup/${canToDelete.id}`)
       } else {
         updatedPieList = pieList
       }
-    }else {
-      console.log(this.state.allList);
+    } else {
       let newCan = this.state.allList.find(ele => ele.name === name);
       this.state.added.push(newCan);
-      // axios.post('https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/newStandupCan',newCan)
       newCan.mode = mode;
       updatedPieList = [...pieList, newCan]
     }

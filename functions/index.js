@@ -44,13 +44,13 @@ const { addStandupHost } = require('./APIs/candidates');
 
 app.post('/add-standup-host', addStandupHost);
 
-const { updateCan } = require('./APIs/candidates');
-
-app.post('/update-can', updateCan);
-
 const {deleteStandupCan}=require('./APIs/candidates');
 
 app.delete('/sirius-standup/:id',deleteStandupCan)
+
+const {deleteCan}=require('./APIs/candidates');
+
+app.delete('/sirius-all/:id',deleteCan)
 
 const { getColors } = require('./APIs/colors');
 

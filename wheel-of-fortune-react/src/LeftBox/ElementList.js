@@ -1,14 +1,29 @@
 import React, { Component } from 'react';
 import './leftBox.scss';
+import axios from 'axios'
 
 import AddElement from './AddElement';
 
 import CandidateList from '../components/CandidateList/candidateList';
 
 class ElementList extends Component {
+    constructor() {
+        super();
+        this.state = {
+            refresh: false
+        }
+    }
 
-    handleChange = (name) => {
-        this.props.reSetElementList(name)
+    handleChange = (ele) => {
+        this.props.reSetElementList(ele.name)
+    }
+    handleClick=(eleInAll,eleInPie)=>{
+        if(eleInAll){
+            axios.delete(`https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/sirius-all/${eleInAll.id}`)
+        }
+        if(eleInPie){
+            axios.delete(`https://us-central1-wheel-of-fortune-b4c69.cloudfunctions.net/api/sirius-standup/${eleInAll.id}`)
+        }
     }
     render() {
         return (
@@ -21,9 +36,11 @@ class ElementList extends Component {
                 <CandidateList
                     allList={this.props.allList}
                     pieList={this.props.pieList}
-                    handleChange={this.handleChange} />
+                    handleChange={this.handleChange}
+                    handleClick={this.handleClick} 
+                    />
                 <AddElement allList={this.props.allList}
-                pieList={this.props.pieList}/>
+                    pieList={this.props.pieList} />
             </div>
         )
     }

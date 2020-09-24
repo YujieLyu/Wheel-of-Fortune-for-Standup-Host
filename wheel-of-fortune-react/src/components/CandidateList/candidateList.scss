@@ -1,5 +1,6 @@
 .candidate-list {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   
   input[type="checkbox"] {
@@ -11,5 +12,10 @@
 
   label {
     font-size: 18px;
+  }
+
+  .delete{
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
   }
 }
