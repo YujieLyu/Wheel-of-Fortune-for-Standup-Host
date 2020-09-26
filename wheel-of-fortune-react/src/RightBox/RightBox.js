@@ -44,12 +44,12 @@ class RightBox extends Component {
             case "tips":
                 this.setState({
                     tip: true
-                })
+                });
+                break;
             default:
                 console.log('cannot get the mode for button')
         }
     }
-
 
     render() {
         return (
@@ -72,7 +72,7 @@ class RightBox extends Component {
                         name="Sprint Planning" />
                 </div>
 
-                <ToggleTips title="Click to check the update!!" />
+                <ToggleTips title="Click to check the update" />
 
             </div>
         )

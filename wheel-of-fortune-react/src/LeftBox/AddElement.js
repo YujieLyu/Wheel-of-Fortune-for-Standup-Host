@@ -16,6 +16,7 @@ class AddElement extends Component {
         const newCandidate = {
             name: this.state.name
         }
+        this.props.addCan(newCandidate);
         console.log(this.props.allList);
         this.addElement(newCandidate);
         if (this.state.name !== '') {
@@ -47,30 +48,7 @@ class AddElement extends Component {
         })
     }
 
-    reSetElementList = (name, mode) => {
 
-        const pieList = [...this.props.pieList];
-        let updatedPieList;
-
-        if (pieList.some(ele => ele.name === name)) {
-            if (pieList.length >= 4) {
-                updatedPieList = pieList.filter(ele => {
-                    return ele.name !== name
-                })
-            } else {
-                updatedPieList = pieList
-            }
-        } else {
-            console.log(this.props.allList);
-            let newCan = this.props.allList.find(ele => ele.name === name);
-            newCan.mode = mode;
-            updatedPieList = [...pieList, newCan]
-        }
-        this.setState({
-            pieList: updatedPieList
-        })
-
-    }
 
     render() {
         return (

@@ -1,14 +1,24 @@
 import React, { Component } from 'react';
 import './leftBox.scss';
 
+
 import AddElement from './AddElement';
 
 import CandidateList from '../components/CandidateList/candidateList';
 
 class ElementList extends Component {
+    constructor() {
+        super();
+        this.state = {
+            refresh: false
+        }
+    }
 
-    handleChange = (name) => {
-        this.props.reSetElementList(name)
+    handleChange = (ele) => {
+        this.props.reSetElementList(ele.name)
+    }
+    handleClick = (eleInAll, eleInPie) => {
+        this.props.deleteCan(eleInAll, eleInPie)
     }
     render() {
         return (
@@ -21,10 +31,13 @@ class ElementList extends Component {
                 <CandidateList
                     allList={this.props.allList}
                     pieList={this.props.pieList}
-                    handleChange={this.handleChange} />
-                <AddElement 
-                allList={this.props.allList}
-                pieList={this.props.pieList}Î/>
+                    handleChange={this.handleChange}
+                    handleClick={this.handleClick}
+                />
+                <AddElement
+                    allList={this.props.allList}
+                    pieList={this.props.pieList}
+                    addCan={this.props.addCan} />
             </div>
         )
     }
