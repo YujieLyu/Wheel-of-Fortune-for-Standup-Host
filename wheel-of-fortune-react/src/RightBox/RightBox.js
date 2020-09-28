@@ -71,8 +71,10 @@ class RightBox extends Component {
                         handleClick={this.handleClick}
                         name="Sprint Planning" />
                 </div>
+                <div className="tip-container">
+                    <ToggleTips title="Click to check the update" />
+                </div>
 
-                <ToggleTips title="Click to check the update" />
 
             </div>
         )

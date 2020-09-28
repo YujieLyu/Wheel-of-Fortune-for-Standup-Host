@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './toggleTips.scss';
 
-const ToggleTips = ({ title }) => {
+const ToggleTips = ({ title, content }) => {
     const [isOpened, setIsOpened] = useState(false);
 
     const toggle = () => {
@@ -15,10 +15,20 @@ const ToggleTips = ({ title }) => {
             </div>
             {isOpened && (
                 <div className="tip-content">
-                    The functions of the wheels have been improved, including:<br/>
-                    1. Removing candidates<br/>
-                    2. Recording the last defined candidate list<br/>
-                    Well, the developer need a bit more time to perfect these features<br/>
+                    {content ?
+                        (
+                            <div>{content}</div>
+                        ) : (
+                            <div>
+                                The functions of the wheels have been improved, including:<br />
+                            1. Removing candidates <br />
+                            2. Recording the last defined candidate list<br />
+                            However, the developer need a bit more time to perfect these features :D<br />
+                            Hope you have fun!
+                            </div>
+
+                        )}
+
                 </div>
             )}
         </div>

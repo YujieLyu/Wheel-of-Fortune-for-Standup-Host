@@ -5,6 +5,7 @@ import './leftBox.scss';
 import AddElement from './AddElement';
 
 import CandidateList from '../components/CandidateList/candidateList';
+import ToggleTips from '../components/ToggleTips/toggleTips';
 
 class ElementList extends Component {
     constructor() {
@@ -25,7 +26,7 @@ class ElementList extends Component {
             <div className="LeftBox">
                 <div className="title">
                     <h1>{this.props.mode} Wheel</h1>
-                    <p>(Ver 4.0.0.dev1.200922_beta)</p>
+                    <p>(Ver 4.0.1.dev1.200924_alpha)</p>
                 </div>
                 <p>No less than 3 options</p>
                 <CandidateList
@@ -38,6 +39,8 @@ class ElementList extends Component {
                     allList={this.props.allList}
                     pieList={this.props.pieList}
                     addCan={this.props.addCan} />
+                <ToggleTips title="add/delete tips"
+                    content="Need to refresh the page before deleting the newly added candidates temporarily. The developer is struggling with the problem of refetching data after component update" />
             </div>
         )
     }
