@@ -126,6 +126,14 @@ exports.deleteStandupCan = (request, response) => {
     deleteMethod(request, response, 'sirius-standup')
 }
 
+exports.deleteRretroCan = (request, response) => {
+    deleteMethod(request, response, 'sirius-retro')
+}
+
+exports.deleteSprintplanCan = (request, response) => {
+    deleteMethod(request, response, 'sirius-sprintplan')
+}
+
 exports.deleteCan = (request, response) => {
     deleteMethod(request, response, 'sirius-all')
 }
