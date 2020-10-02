@@ -40,6 +40,14 @@ const { addNewStandupCan } = require('./APIs/candidates');
 
 app.post('/newStandupCan', addNewStandupCan);
 
+const { addNewRetroCan } = require('./APIs/candidates');
+
+app.post('/newRetroCan', addNewRetroCan);
+
+const { addNewSprintplanCan } = require('./APIs/candidates');
+
+app.post('/newSprintplanCan', addNewSprintplanCan);
+
 const { addStandupHost } = require('./APIs/candidates');
 
 app.post('/add-standup-host', addStandupHost);
