@@ -104,6 +104,18 @@ exports.addNewStandupCan = (request, response) => {
 
 }
 
+exports.addNewRetroCan = (request, response) => {
+
+    addMethod(request, response, 'sirius-retro', 'retro');
+
+}
+
+exports.addNewSprintplanCan = (request, response) => {
+
+    addMethod(request, response, 'sirius-sprintplan', 'plan');
+
+}
+
 exports.addStandupHost = (request, response) => {
 
     addMethod(request, response, 'sirius-standup-hosts', 'standup-host');
