@@ -48,10 +48,6 @@ const { addNewSprintplanCan } = require('./APIs/candidates');
 
 app.post('/newSprintplanCan', addNewSprintplanCan);
 
-const { addStandupHost } = require('./APIs/candidates');
-
-app.post('/add-standup-host', addStandupHost);
-
 const {deleteStandupCan}=require('./APIs/candidates');
 
 app.delete('/sirius-standup/:id',deleteStandupCan);
