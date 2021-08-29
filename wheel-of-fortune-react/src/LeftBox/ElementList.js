@@ -26,7 +26,7 @@ class ElementList extends Component {
             <div className="LeftBox">
                 <div className="title">
                     <h1>{this.props.mode} Wheel</h1>
-                    <p>(Ver 4.0.1.dev1.200924_alpha)</p>
+                    <p>(210824_beta)</p>
                 </div>
                 <p>No less than 3 options</p>
                 <CandidateList
